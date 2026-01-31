@@ -986,7 +986,7 @@ tile_set = SubResource("TileSet_i7m21")
 
 [node name="PlayerCharacter" type="CharacterBody2D" parent="."]
 z_index = 2
-position = Vector2(63, 244)
+position = Vector2(43, 264)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("4_cke1q")
@@ -1007,7 +1007,7 @@ texture = ExtResource("7_04tag")
 region_rect = Rect2(0, 0, 789.61, 800)
 
 [node name="TheORB" type="RigidBody2D" parent="."]
-position = Vector2(117, 289)
+position = Vector2(147, 288)
 collision_layer = 10
 collision_mask = 10
 script = ExtResource("8_ce8d2")
