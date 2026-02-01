@@ -226,7 +226,7 @@ tile_set = ExtResource("6_yrl3s")
 
 [node name="PlayerCharacter" type="CharacterBody2D" parent="."]
 z_index = 2
-position = Vector2(43, 264)
+position = Vector2(42, 281)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("4_cke1q")
