@@ -5,7 +5,6 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 
 @export var currentOrb: RigidBody2D
-@onready var aura = $"Aura?"
 @onready var globalOrb = $"../TheORB"
 @onready var theGoal = $"../TheGoal"
 @onready var playerSprite = $Sprite2D
@@ -29,6 +28,8 @@ func _input(event):
 				pass
 		elif event.keycode == KEY_W || event.keycode == KEY_SPACE:
 			checkGoal()
+		elif event.keycode == KEY_EQUAL:
+			get_tree().reload_current_scene()
 	return
 
 func _physics_process(delta: float) -> void:
