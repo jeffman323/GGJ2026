@@ -27,7 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://duutchf0qcace" path="res://Images/Character Spirites/orbpickup.png" id="25_f5kd2"]
 [ext_resource type="Texture2D" uid="uid://4tgyocix5aea" path="res://Images/Character Spirites/orbrun.png" id="26_cd0pd"]
 [ext_resource type="Texture2D" uid="uid://b2qjbtnmaea2o" path="res://Images/Character Spirites/run.png" id="27_q1lus"]
-[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scenes/fader.gd" id="28_7bdrb"]
+[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scripts/fader.gd" id="28_7bdrb"]
 [ext_resource type="Texture2D" uid="uid://bqljh1s5e1w75" path="res://Images/title.png" id="29_w7qh8"]
 [ext_resource type="Texture2D" uid="uid://cc6ytb4nhdu0a" path="res://Images/tutorial.png" id="30_haecg"]
 

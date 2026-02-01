@@ -31,6 +31,9 @@ func _input(event):
 			checkGoal()
 		elif event.keycode == KEY_EQUAL:
 			get_tree().reload_current_scene()
+		elif event.keycode == KEY_ENTER:
+			levelUp.emit(theGoal.nextScene)
+			movementLockoutTime = 1.8
 	return
 
 func _physics_process(delta: float) -> void:
@@ -86,6 +89,7 @@ func chooseAnimation(xdir: float,ydir: float):
 	# fallorb = 8
 	# pickup = 9
 	if(dieLockout > 0) :
+		print("locked?")
 		return
 	
 	#check for idle
