@@ -23,7 +23,7 @@ func _input(event):
 
 func _physics_process(delta: float) -> void:
 	#We need to check proximity to the orb
-	if(global_position.distance_to(globalOrb.global_position) < 55 || currentOrb!=null):
+	if(global_position.distance_to(globalOrb.global_position) < 75 || currentOrb!=null):
 		self.set_collision_layer_value(4, true)
 		self.set_collision_mask_value(4, true)
 		self.set_collision_layer_value(3, false)
