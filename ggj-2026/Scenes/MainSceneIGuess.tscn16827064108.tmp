@@ -1,6 +1,6 @@
 [gd_scene load_steps=57 format=4 uid="uid://ub3xink7jg5m"]
 
-[ext_resource type="Script" uid="uid://5gp2kfvvoorw" path="res://Scripts/MainScene.gd" id="1_4d72h"]
+[ext_resource type="Script" uid="uid://5gp2kfvvoorw" path="res://Scenes/MainScene.gd" id="1_4d72h"]
 [ext_resource type="Shader" uid="uid://btlbbuftx7w8b" path="res://Images/Shaders/ReactToOrb.gdshader" id="1_04tag"]
 [ext_resource type="Texture2D" uid="uid://rapifyuv72vo" path="res://Images/backgroundsv2.png" id="1_oxga5"]
 [ext_resource type="TileSet" uid="uid://b2i670dv5mbbd" path="res://Images/TileSets/AllLayerWalls.tres" id="2_oxga5"]

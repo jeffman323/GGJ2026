@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://jkbdh6hpbwxf"]
 
-[ext_resource type="Shader" uid="uid://btlbbuftx7w8b" path="res://ReactToOrb.gdshader" id="1_rwr2b"]
+[ext_resource type="Shader" uid="uid://btlbbuftx7w8b" path="res://Images/Shaders/ReactToOrb.gdshader" id="1_rwr2b"]
 [ext_resource type="Texture2D" uid="uid://cmnes7okt78a1" path="res://Images/walls-2b.png" id="1_tcdjv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6vm3d"]
