@@ -1,12 +1,11 @@
-[gd_scene load_steps=57 format=4 uid="uid://ub3xink7jg5m"]
+[gd_scene load_steps=56 format=4 uid="uid://ub3xink7jg5m"]
 
-[ext_resource type="Script" uid="uid://5gp2kfvvoorw" path="res://Scripts/MainScene.gd" id="1_4d72h"]
-[ext_resource type="Shader" uid="uid://btlbbuftx7w8b" path="res://Images/Shaders/ReactToOrb.gdshader" id="1_04tag"]
+[ext_resource type="Shader" uid="uid://btlbbuftx7w8b" path="res://ReactToOrb.gdshader" id="1_04tag"]
 [ext_resource type="Texture2D" uid="uid://rapifyuv72vo" path="res://Images/backgroundsv2.png" id="1_oxga5"]
 [ext_resource type="TileSet" uid="uid://b2i670dv5mbbd" path="res://Images/TileSets/AllLayerWalls.tres" id="2_oxga5"]
 [ext_resource type="TileSet" uid="uid://di4vpw2lwm51o" path="res://Images/TileSets/BaseLayerNoOrb.tres" id="3_04tag"]
 [ext_resource type="Script" uid="uid://eec2v4sh3nyt" path="res://Scripts/OrbReactScript.gd" id="3_ce8d2"]
-[ext_resource type="Shader" uid="uid://r3h3dx82yd4i" path="res://Images/Shaders/JustToUpdateGlobals.gdshader" id="4_04tag"]
+[ext_resource type="Shader" uid="uid://r3h3dx82yd4i" path="res://JustToUpdateGlobals.gdshader" id="4_04tag"]
 [ext_resource type="TileSet" uid="uid://jkbdh6hpbwxf" path="res://Images/TileSets/BaseLayerYesOrb.tres" id="4_ce8d2"]
 [ext_resource type="Script" uid="uid://n0uqu14nl43w" path="res://Scripts/PlayerCharacter.gd" id="4_cke1q"]
 [ext_resource type="TileSet" uid="uid://nuuxdmuatm4b" path="res://Images/TileSets/OrbLayerNoOrb.tres" id="5_7gr6y"]
@@ -22,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://duutchf0qcace" path="res://Images/Character Spirites/orbpickup.png" id="17_4d72h"]
 [ext_resource type="Texture2D" uid="uid://dpa3ekitjfk1s" path="res://Images/orb-dropped.png" id="21_4qc6u"]
 [ext_resource type="Texture2D" uid="uid://c51qfuedgay4s" path="res://Images/orb-pickedup.png" id="21_vjh8j"]
-[ext_resource type="Script" uid="uid://b7n6wq7dw6nd" path="res://Scripts/the_goal.gd" id="24_376b5"]
+[ext_resource type="Script" uid="uid://b7n6wq7dw6nd" path="res://Scenes/the_goal.gd" id="24_376b5"]
 [ext_resource type="Texture2D" uid="uid://ba5hvxthj7hkx" path="res://Images/goalspawn.png" id="24_wylx0"]
 [ext_resource type="Texture2D" uid="uid://bbdasepaskrrb" path="res://Images/goalidle1.png" id="25_4d72h"]
 [ext_resource type="Texture2D" uid="uid://cgf2qg5livu11" path="res://Images/goalidle2.png" id="27_1rwvs"]
@@ -181,46 +180,6 @@ tracks/2/keys = {
 "values": [8]
 }
 
-[sub_resource type="Animation" id="Animation_vjh8j"]
-resource_name = "fall"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.049999982, 0.099999994, 0.14999998, 0.19999999, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [6, 7, 8, 9, 10, 11, 12]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [13]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("13_4qc6u")]
-}
-
 [sub_resource type="Animation" id="Animation_7gr6y"]
 resource_name = "idle"
 length = 0.8
@@ -301,46 +260,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("13_4qc6u")]
-}
-
-[sub_resource type="Animation" id="Animation_4qc6u"]
-resource_name = "orbfall"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [7, 8, 9, 10, 11, 12, 12]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [13]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("14_2oxq5")]
 }
 
 [sub_resource type="Animation" id="Animation_1rwvs"]
@@ -548,6 +467,86 @@ tracks/2/keys = {
 "values": [4]
 }
 
+[sub_resource type="Animation" id="Animation_vjh8j"]
+resource_name = "fall"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.049999982, 0.099999994, 0.14999998, 0.19999999, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_4qc6u")]
+}
+
+[sub_resource type="Animation" id="Animation_4qc6u"]
+resource_name = "orbfall"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("14_2oxq5")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_syxub"]
 _data = {
 &"RESET": SubResource("Animation_yrl3s"),
@@ -606,45 +605,19 @@ tracks/2/keys = {
 "values": [ExtResource("14_oxga5")]
 }
 
-[sub_resource type="Animation" id="Animation_wylx0"]
-resource_name = "OrbDrop"
-length = 0.6
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_ce8d2"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TheORBSprite:texture")
+tracks/0/path = NodePath("TheORBSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("21_4qc6u")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TheORBSprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TheORBSprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_2oxq5"]
@@ -688,19 +661,45 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
-[sub_resource type="Animation" id="Animation_ce8d2"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_wylx0"]
+resource_name = "OrbDrop"
+length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TheORBSprite:frame")
+tracks/0/path = NodePath("TheORBSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [ExtResource("21_4qc6u")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TheORBSprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TheORBSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7gr6y"]
@@ -709,6 +708,73 @@ _data = {
 &"OrbDrop": SubResource("Animation_wylx0"),
 &"OrbPickup": SubResource("Animation_2oxq5"),
 &"RESET": SubResource("Animation_ce8d2")
+}
+
+[sub_resource type="Animation" id="Animation_376b5"]
+resource_name = "GoalSpawn"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_wylx0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_4d72h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_ijri2"]
@@ -791,73 +857,6 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 0]
 }
 
-[sub_resource type="Animation" id="Animation_376b5"]
-resource_name = "GoalSpawn"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("24_wylx0")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [12]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-}
-
-[sub_resource type="Animation" id="Animation_4d72h"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [12]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1rwvs"]
 _data = {
 &"GoalBlink1": SubResource("Animation_ijri2"),
@@ -867,7 +866,6 @@ _data = {
 }
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_4d72h")
 
 [node name="Map" type="Node2D" parent="."]
 position = Vector2(16, 16)
@@ -963,7 +961,6 @@ libraries = {
 [node name="TheGoal" type="Node2D" parent="."]
 position = Vector2(60, 176)
 script = ExtResource("24_376b5")
-nextScene = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="TheGoal"]
 texture = ExtResource("27_1rwvs")

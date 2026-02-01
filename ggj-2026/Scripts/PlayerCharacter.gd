@@ -7,22 +7,28 @@ const JUMP_VELOCITY = -300.0
 @export var currentOrb: RigidBody2D
 @onready var aura = $"Aura?"
 @onready var globalOrb = $"../TheORB"
+@onready var theGoal = $"../TheGoal"
 @onready var playerSprite = $Sprite2D
 @onready var animator = $Sprite2D/AnimationPlayer
 
 var lastAnimation = 0;
+var movementLockoutTime = 0
 
 signal pickup
+signal levelUp
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_SPACE:
+		if event.keycode == KEY_E:
 			if currentOrb==null:
 				pickup.emit()
 				pass
 			elif currentOrb!= null:
+				pickup.emit()
 				dropTheOrb()
 				pass
+		elif event.keycode == KEY_W || event.keycode == KEY_SPACE:
+			checkGoal()
 	return
 
 func _physics_process(delta: float) -> void:
@@ -38,25 +44,29 @@ func _physics_process(delta: float) -> void:
 		self.set_collision_layer_value(4, false)
 		self.set_collision_mask_value(4, false)
 	
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_up") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+	#no moving if we're picking up an orb
+	if (movementLockoutTime > 0.0) :
+		movementLockoutTime -= delta
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
-	chooseAnimation(velocity.x,velocity.y)
-	
-	move_and_slide()
+		# Add the gravity.
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+
+		# Handle jump.
+		if Input.is_action_just_pressed("ui_up") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var direction := Input.get_axis("ui_left", "ui_right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+		
+		chooseAnimation(velocity.x,velocity.y)
+		
+		move_and_slide()
 	
 func chooseAnimation(xdir: float,ydir: float):
 	#lastAnimation guide:
@@ -150,22 +160,25 @@ func chooseAnimation(xdir: float,ydir: float):
 			lastAnimation = 8
 		
 func applyOrbCarried(orb: RigidBody2D):
+	#initiate animation lockout
+	animator.play("orbpickup")
+	movementLockoutTime = 0.7
+	
 	currentOrb = orb
 	self.set_collision_layer_value(4, true)
 	self.set_collision_mask_value(4, true)
 	self.set_collision_layer_value(3, false)
 	self.set_collision_mask_value(3, false)
-	#remove the orb
-	currentOrb.visible = false
-	#self.aura.visible = true
-	currentOrb.process_mode = Node.PROCESS_MODE_DISABLED
+
 	return
 	
 func dropTheOrb():
-	currentOrb.position = self.position
+	if (movementLockoutTime > 0.0):
+		return
+	currentOrb.position = self.position+Vector2(0,0)
+	currentOrb.linear_velocity=Vector2(0,0)
 	currentOrb.process_mode = Node.PROCESS_MODE_INHERIT
 	currentOrb.visible = true
-	self.aura.visible = false
 	currentOrb.move_and_collide(Vector2(0,-1))
 	currentOrb = null
 	self.set_collision_layer_value(3, true)
@@ -174,3 +187,7 @@ func dropTheOrb():
 	self.set_collision_mask_value(4, false)
 	#recreate the orb at the current position
 	return
+
+func checkGoal():
+	if self.global_position.distance_to(theGoal.global_position) < 25:
+		levelUp.emit(theGoal.nextScene)
