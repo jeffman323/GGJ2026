@@ -14,3 +14,10 @@ config/name="GGJ 2026"
 run/main_scene="uid://ub3xink7jg5m"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Images/icon.svg"
+
+[shader_globals]
+
+orb_position={
+"type": "vec2",
+"value": Vector2(0, 0)
+}

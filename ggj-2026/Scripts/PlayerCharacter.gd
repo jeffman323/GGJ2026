@@ -4,8 +4,9 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-var currentOrb: RigidBody2D
+@export var currentOrb: RigidBody2D
 @onready var aura = $"Aura?"
+@onready var globalOrb = $"../TheORB"
 
 signal pickup
 
@@ -21,6 +22,17 @@ func _input(event):
 	return
 
 func _physics_process(delta: float) -> void:
+	#We need to check proximity to the orb
+	if(global_position.distance_to(globalOrb.global_position) < 55 || currentOrb!=null):
+		self.set_collision_layer_value(4, true)
+		self.set_collision_mask_value(4, true)
+		self.set_collision_layer_value(3, false)
+		self.set_collision_mask_value(3, false)
+	else:
+		self.set_collision_layer_value(3, true)
+		self.set_collision_mask_value(3, true)
+		self.set_collision_layer_value(4, false)
+		self.set_collision_mask_value(4, false)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -48,7 +60,7 @@ func applyOrbCarried(orb: RigidBody2D):
 	self.set_collision_mask_value(3, false)
 	#remove the orb
 	currentOrb.visible = false
-	self.aura.visible = true
+	#self.aura.visible = true
 	currentOrb.process_mode = Node.PROCESS_MODE_DISABLED
 	return
 	
