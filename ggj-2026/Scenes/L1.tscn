@@ -27,7 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://docnfa582a730" path="res://Images/goalpower.png" id="26_4mklh"]
 [ext_resource type="Texture2D" uid="uid://dcx7sfjnnsd3u" path="res://Images/goaldespawn.png" id="26_l4tfr"]
 [ext_resource type="Texture2D" uid="uid://euahn6kq0e20" path="res://Images/screenwipe.png" id="27_gvp4o"]
-[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scenes/fader.gd" id="28_1m6wk"]
+[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scripts/fader.gd" id="28_1m6wk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04tag"]
 texture = ExtResource("2_gvp4o")

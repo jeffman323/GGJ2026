@@ -1,0 +1,2675 @@
+[gd_scene load_steps=75 format=4 uid="uid://bcceusm7l7pqj"]
+
+[ext_resource type="Script" uid="uid://5gp2kfvvoorw" path="res://Scripts/MainScene.gd" id="1_ovrma"]
+[ext_resource type="Texture2D" uid="uid://euahn6kq0e20" path="res://Images/screenwipe.png" id="2_kbjjh"]
+[ext_resource type="Script" uid="uid://b7n6wq7dw6nd" path="res://Scripts/the_goal.gd" id="3_tqj3p"]
+[ext_resource type="Texture2D" uid="uid://dcx7sfjnnsd3u" path="res://Images/goaldespawn.png" id="4_wackd"]
+[ext_resource type="Texture2D" uid="uid://b4qacrynm82rt" path="res://Images/goalbig.png" id="5_i06pu"]
+[ext_resource type="Texture2D" uid="uid://docnfa582a730" path="res://Images/goalpower.png" id="6_ulri6"]
+[ext_resource type="Script" uid="uid://n0uqu14nl43w" path="res://Scripts/PlayerCharacter.gd" id="7_4pp07"]
+[ext_resource type="Texture2D" uid="uid://dugy4wkvs2x4a" path="res://Images/Character Spirites/idle.png" id="8_a83pl"]
+[ext_resource type="Texture2D" uid="uid://bfueqdsbnrsgw" path="res://Images/ded.png" id="9_4vib2"]
+[ext_resource type="Texture2D" uid="uid://d32sllm3ldewv" path="res://Images/Character Spirites/jump.png" id="10_pu4t4"]
+[ext_resource type="Texture2D" uid="uid://c2narx1dm72wg" path="res://Images/Character Spirites/orbjump.png" id="11_m2ngx"]
+[ext_resource type="Texture2D" uid="uid://dppd5c0x3qwbs" path="res://Images/Character Spirites/orbidle.png" id="12_blre7"]
+[ext_resource type="Texture2D" uid="uid://duutchf0qcace" path="res://Images/Character Spirites/orbpickup.png" id="13_1yj84"]
+[ext_resource type="Texture2D" uid="uid://4tgyocix5aea" path="res://Images/Character Spirites/orbrun.png" id="14_l65tr"]
+[ext_resource type="Texture2D" uid="uid://b2qjbtnmaea2o" path="res://Images/Character Spirites/run.png" id="15_u785d"]
+[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scripts/fader.gd" id="16_kwanr"]
+[ext_resource type="Texture2D" uid="uid://rapifyuv72vo" path="res://Images/backgroundsv2.png" id="17_5va11"]
+[ext_resource type="Shader" uid="uid://btlbbuftx7w8b" path="res://Images/Shaders/ReactToOrb.gdshader" id="18_d7brb"]
+[ext_resource type="Script" uid="uid://eec2v4sh3nyt" path="res://Scripts/OrbReactScript.gd" id="19_2vfvw"]
+[ext_resource type="Shader" uid="uid://r3h3dx82yd4i" path="res://Images/Shaders/JustToUpdateGlobals.gdshader" id="20_n0man"]
+[ext_resource type="TileSet" uid="uid://b2i670dv5mbbd" path="res://Images/TileSets/AllLayerWalls.tres" id="21_hnqcj"]
+[ext_resource type="TileSet" uid="uid://di4vpw2lwm51o" path="res://Images/TileSets/BaseLayerNoOrb.tres" id="22_alvlu"]
+[ext_resource type="TileSet" uid="uid://jkbdh6hpbwxf" path="res://Images/TileSets/BaseLayerYesOrb.tres" id="23_jxbe6"]
+[ext_resource type="TileSet" uid="uid://nuuxdmuatm4b" path="res://Images/TileSets/OrbLayerNoOrb.tres" id="24_57hqd"]
+[ext_resource type="TileSet" uid="uid://50ipgsqjv3j3" path="res://Images/TileSets/OrbLayerYesOrb.tres" id="25_0ke12"]
+[ext_resource type="Script" uid="uid://buaal3v1mpw7k" path="res://Scripts/the_orb_script.gd" id="26_bnv6i"]
+[ext_resource type="Texture2D" uid="uid://dpwvppewj86qv" path="res://Images/orb.png" id="27_gsptd"]
+[ext_resource type="Texture2D" uid="uid://dpa3ekitjfk1s" path="res://Images/orb-dropped.png" id="28_tqwlr"]
+[ext_resource type="Texture2D" uid="uid://c51qfuedgay4s" path="res://Images/orb-pickedup.png" id="29_x4cbq"]
+[ext_resource type="Texture2D" uid="uid://dsy87n5bl4cag" path="res://Images/spikes.png" id="30_xud6t"]
+[ext_resource type="Script" uid="uid://cy40im76nwykj" path="res://Scripts/spikes.gd" id="31_555mn"]
+
+[sub_resource type="Animation" id="Animation_hfk56"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_83csk"]
+resource_name = "screenwipe"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_p7nda"]
+resource_name = "wipespawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ykh2"]
+_data = {
+&"RESET": SubResource("Animation_hfk56"),
+&"screenwipe": SubResource("Animation_83csk"),
+&"wipespawn": SubResource("Animation_p7nda")
+}
+
+[sub_resource type="Animation" id="Animation_20nku"]
+resource_name = "GoalBlink1"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_i06pu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_4t0rq"]
+resource_name = "GoalBlink2"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_i06pu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [42, 43, 44, 45, 46, 47, 48, 49, 14]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_i0ro4"]
+resource_name = "GoalSpawn"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_i06pu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_pvpu8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_wackd")]
+}
+
+[sub_resource type="Animation" id="Animation_qvuhn"]
+resource_name = "goaldespawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("6_ulri6"), ExtResource("4_wackd")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.30000007, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 8, 7, 1, 2, 3, 4, 5, 6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_tkvmn"]
+resource_name = "goalreached"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_ulri6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.1999999, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8000001, 1.9, 2, 2.1, 2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 6, 7, 8, 6, 7, 8, 6, 7, 8, 6, 7, 8, 6, 7, 8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x5s57"]
+_data = {
+&"GoalBlink1": SubResource("Animation_20nku"),
+&"GoalBlink2": SubResource("Animation_4t0rq"),
+&"GoalSpawn": SubResource("Animation_i0ro4"),
+&"RESET": SubResource("Animation_pvpu8"),
+&"goaldespawn": SubResource("Animation_qvuhn"),
+&"goalreached": SubResource("Animation_tkvmn")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b548h"]
+size = Vector2(12, 28)
+
+[sub_resource type="Animation" id="Animation_ej3ua"]
+resource_name = "Die"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_4vib2")]
+}
+
+[sub_resource type="Animation" id="Animation_yrl3s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_a83pl")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_vjh8j"]
+resource_name = "fall"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.049999982, 0.099999994, 0.14999998, 0.19999999, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_pu4t4")]
+}
+
+[sub_resource type="Animation" id="Animation_7gr6y"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_a83pl")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_p2x12"]
+resource_name = "jump"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_pu4t4")]
+}
+
+[sub_resource type="Animation" id="Animation_4qc6u"]
+resource_name = "orbfall"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_m2ngx")]
+}
+
+[sub_resource type="Animation" id="Animation_1rwvs"]
+resource_name = "orbidle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_blre7")]
+}
+
+[sub_resource type="Animation" id="Animation_a8hv7"]
+resource_name = "orbjump"
+length = 0.35
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_m2ngx")]
+}
+
+[sub_resource type="Animation" id="Animation_q226e"]
+resource_name = "orbpickup"
+length = 0.8
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_1yj84")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_kfjam"]
+resource_name = "orbrun"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("14_l65tr")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_i7m21"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_u785d")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_syxub"]
+_data = {
+&"Die": SubResource("Animation_ej3ua"),
+&"RESET": SubResource("Animation_yrl3s"),
+&"fall": SubResource("Animation_vjh8j"),
+&"idle": SubResource("Animation_7gr6y"),
+&"jump": SubResource("Animation_p2x12"),
+&"orbfall": SubResource("Animation_4qc6u"),
+&"orbidle": SubResource("Animation_1rwvs"),
+&"orbjump": SubResource("Animation_a8hv7"),
+&"orbpickup": SubResource("Animation_q226e"),
+&"orbrun": SubResource("Animation_kfjam"),
+&"run": SubResource("Animation_i7m21")
+}
+
+[sub_resource type="Animation" id="Animation_1m6wk"]
+resource_name = "Fade"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 3.3333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8mn0l"]
+resource_name = "FadeIn"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 3.3333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5ldm2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8mn0l"]
+_data = {
+&"Fade": SubResource("Animation_1m6wk"),
+&"FadeIn": SubResource("Animation_8mn0l"),
+&"RESET": SubResource("Animation_5ldm2")
+}
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sedmo"]
+texture = ExtResource("17_5va11")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_s3tue"]
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 7
+sources/2 = SubResource("TileSetAtlasSource_sedmo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6npyu"]
+shader = ExtResource("18_d7brb")
+shader_parameter/cutoff = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_04tag"]
+shader = ExtResource("18_d7brb")
+shader_parameter/cutoff = 1.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xm1ga"]
+texture = ExtResource("17_5va11")
+0:0/0 = 0
+0:0/0/material = SubResource("ShaderMaterial_04tag")
+1:0/0 = 0
+1:0/0/material = SubResource("ShaderMaterial_04tag")
+2:0/0 = 0
+2:0/0/material = SubResource("ShaderMaterial_04tag")
+3:0/0 = 0
+3:0/0/material = SubResource("ShaderMaterial_04tag")
+0:1/0 = 0
+0:1/0/material = SubResource("ShaderMaterial_04tag")
+1:1/0 = 0
+1:1/0/material = SubResource("ShaderMaterial_04tag")
+4:0/0 = 0
+4:0/0/material = SubResource("ShaderMaterial_04tag")
+5:0/0 = 0
+5:0/0/material = SubResource("ShaderMaterial_04tag")
+6:0/0 = 0
+6:0/0/material = SubResource("ShaderMaterial_04tag")
+2:1/0 = 0
+2:1/0/material = SubResource("ShaderMaterial_04tag")
+3:1/0 = 0
+3:1/0/material = SubResource("ShaderMaterial_04tag")
+4:1/0 = 0
+4:1/0/material = SubResource("ShaderMaterial_04tag")
+5:1/0 = 0
+5:1/0/material = SubResource("ShaderMaterial_04tag")
+6:1/0 = 0
+6:1/0/material = SubResource("ShaderMaterial_04tag")
+0:2/0 = 0
+0:2/0/material = SubResource("ShaderMaterial_04tag")
+1:2/0 = 0
+1:2/0/material = SubResource("ShaderMaterial_04tag")
+2:2/0 = 0
+2:2/0/material = SubResource("ShaderMaterial_04tag")
+3:2/0 = 0
+3:2/0/material = SubResource("ShaderMaterial_04tag")
+4:2/0 = 0
+4:2/0/material = SubResource("ShaderMaterial_04tag")
+5:2/0 = 0
+5:2/0/material = SubResource("ShaderMaterial_04tag")
+6:2/0 = 0
+6:2/0/material = SubResource("ShaderMaterial_04tag")
+0:3/0 = 0
+0:3/0/material = SubResource("ShaderMaterial_04tag")
+1:3/0 = 0
+1:3/0/material = SubResource("ShaderMaterial_04tag")
+2:3/0 = 0
+2:3/0/material = SubResource("ShaderMaterial_04tag")
+3:3/0 = 0
+3:3/0/material = SubResource("ShaderMaterial_04tag")
+4:3/0 = 0
+4:3/0/material = SubResource("ShaderMaterial_04tag")
+5:3/0 = 0
+5:3/0/material = SubResource("ShaderMaterial_04tag")
+6:3/0 = 0
+6:3/0/material = SubResource("ShaderMaterial_04tag")
+
+[sub_resource type="TileSet" id="TileSet_x76xo"]
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 7
+sources/2 = SubResource("TileSetAtlasSource_xm1ga")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_un60j"]
+shader = ExtResource("20_n0man")
+shader_parameter/orb_updater = Vector2(0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sedmo"]
+radius = 6.5
+
+[sub_resource type="Animation" id="Animation_04tag"]
+resource_name = "OrbCycle"
+length = 1.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TheORBSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TheORBSprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TheORBSprite:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("27_gsptd")]
+}
+
+[sub_resource type="Animation" id="Animation_wylx0"]
+resource_name = "OrbDrop"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TheORBSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_tqwlr")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TheORBSprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TheORBSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_2oxq5"]
+resource_name = "OrbPickup"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TheORBSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("29_x4cbq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TheORBSprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TheORBSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_ce8d2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TheORBSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7gr6y"]
+_data = {
+&"OrbCycle": SubResource("Animation_04tag"),
+&"OrbDrop": SubResource("Animation_wylx0"),
+&"OrbPickup": SubResource("Animation_2oxq5"),
+&"RESET": SubResource("Animation_ce8d2")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ienww"]
+shader = ExtResource("18_d7brb")
+shader_parameter/cutoff = 1.0
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_0b5yr"]
+points = PackedVector2Array(7, 7, 7, 0, 0, -5, -7, 0, -7, 7)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ovrma")
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(1, 0)
+anchor_mode = 0
+
+[node name="Level Transition" type="Node2D" parent="."]
+position = Vector2(-79, 136)
+
+[node name="Sprite2D" type="Sprite2D" parent="Level Transition"]
+texture = ExtResource("2_kbjjh")
+hframes = 8
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level Transition/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_0ykh2")
+}
+
+[node name="CanvasLayerPLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TheGoal" type="Node2D" parent="CanvasLayerPLayer"]
+z_index = 4
+position = Vector2(432, 176)
+script = ExtResource("3_tqj3p")
+nextScene = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayerPLayer/TheGoal"]
+z_index = 4
+texture = ExtResource("4_wackd")
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayerPLayer/TheGoal/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_x5s57")
+}
+
+[node name="FakeGoalSprite" type="Sprite2D" parent="CanvasLayerPLayer/TheGoal"]
+z_index = 4
+position = Vector2(32, 65)
+texture = ExtResource("4_wackd")
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayerPLayer/TheGoal/FakeGoalSprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_x5s57")
+}
+
+[node name="PlayerCharacter" type="CharacterBody2D" parent="CanvasLayerPLayer"]
+z_index = 2
+position = Vector2(472, 256)
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("7_4pp07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayerPLayer/PlayerCharacter"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_b548h")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayerPLayer/PlayerCharacter"]
+z_index = 2
+texture = ExtResource("8_a83pl")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayerPLayer/PlayerCharacter/Sprite2D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_syxub")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("16_kwanr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_8mn0l")
+}
+
+[node name="Map" type="Node2D" parent="."]
+position = Vector2(16, 16)
+
+[node name="Background(YesOrb)" type="TileMapLayer" parent="Map"]
+z_index = -1
+use_parent_material = true
+position = Vector2(16, 16)
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAIAAAABAAAAAgAAAAIAAAACAAAAAgAAAAIAAAADAAAAAgAAAAIAAAAEAAAAAgAAAAIAAAAFAAAAAgAAAAIAAAAGAAAAAgAAAAIAAAAHAAAAAgAAAAIAAAAIAAAAAgAAAAIAAAAJAAAAAgAAAAIAAAAKAAAAAgAAAAIAAAALAAAAAgAAAAIAAAAMAAAAAgAAAAIAAAANAAAAAgAAAAIAAAAOAAAAAgAAAAIAAAAPAAAAAgAAAAIAAAAQAAAAAgAAAAIAAAARAAAAAgAAAAIAAAASAAAAAgAAAAIAAAATAAAAAgAAAAIAAAATAAEAAgAAAAIAAAATAAIAAgAAAAIAAAATAAMAAgAAAAIAAAATAAQAAgAAAAIAAAATAAUAAgAAAAIAAAATAAYAAgAAAAIAAAATAAcAAgAAAAIAAAATAAgAAgAAAAIAAAATAAkAAgAAAAIAAAAAAAgAAgAAAAIAAAAAAAcAAgAAAAIAAAAAAAYAAgAAAAIAAAAAAAUAAgAAAAIAAAAAAAQAAgAAAAIAAAAAAAMAAgAAAAIAAAAAAAIAAgAAAAIAAAAAAAEAAgAAAAIAAAABAAEAAgAAAAIAAAACAAEAAgAAAAIAAAADAAEAAgAAAAIAAAAEAAEAAgAAAAIAAAAFAAEAAgAAAAIAAAAGAAEAAgAAAAIAAAAHAAEAAgAAAAIAAAAIAAEAAgAAAAIAAAAJAAEAAgAAAAIAAAAKAAEAAgAAAAIAAAALAAEAAgAAAAIAAAAMAAEAAgAAAAIAAAANAAEAAgAAAAIAAAAOAAEAAgAAAAIAAAAPAAEAAgAAAAIAAAAQAAEAAgAAAAIAAAARAAEAAgAAAAIAAAASAAEAAgAAAAIAAAASAAIAAgAAAAIAAAASAAMAAgAAAAIAAAASAAQAAgAAAAIAAAASAAUAAgAAAAIAAAASAAYAAgAAAAIAAAASAAcAAgAAAAIAAAASAAgAAgAAAAIAAAARAAgAAgAAAAIAAAAQAAgAAgAAAAIAAAAPAAgAAgAAAAIAAAAOAAgAAgAAAAIAAAANAAgAAgAAAAIAAAAMAAgAAgAAAAIAAAALAAgAAgAAAAIAAAAKAAgAAgAAAAIAAAAJAAgAAgAAAAIAAAAIAAgAAgAAAAIAAAAHAAgAAgAAAAIAAAAGAAgAAgAAAAIAAAAFAAgAAgAAAAIAAAAEAAgAAgAAAAIAAAADAAgAAgAAAAIAAAACAAgAAgAAAAIAAAABAAgAAgAAAAIAAAABAAYAAgAAAAIAAAABAAcAAgAAAAIAAAACAAcAAgAAAAIAAAAGAAcAAgAAAAIAAAAHAAcAAgAAAAIAAAAIAAcAAgAAAAIAAAAJAAcAAgAAAAIAAAAKAAcAAgAAAAIAAAALAAcAAgAAAAIAAAAMAAcAAgAAAAIAAAAMAAYAAgAAAAIAAAANAAYAAgAAAAIAAAAOAAYAAgAAAAIAAAAPAAYAAgAAAAIAAAAQAAYAAgAAAAIAAAAQAAcAAgAAAAIAAAARAAcAAgAAAAIAAAAPAAcAAgAAAAIAAAAOAAcAAgAAAAIAAAANAAcAAgAAAAIAAAAFAAcAAgAAAAIAAAAEAAcAAgAAAAIAAAADAAcAAgAAAAIAAAABAAUAAgAAAAIAAAACAAUAAgAAAAIAAAADAAUAAgAAAAIAAAADAAYAAgAAAAIAAAAEAAYAAgAAAAIAAAAFAAYAAgAAAAIAAAAGAAYAAgAAAAIAAAAHAAYAAgAAAAIAAAAIAAYAAgAAAAIAAAAJAAUAAgAAAAIAAAAKAAUAAgAAAAIAAAAJAAYAAgAAAAIAAAACAAYAAgAAAAIAAAAKAAYAAgAAAAIAAAALAAYAAgAAAAIAAAAPAAUAAgAAAAIAAAAQAAUAAgAAAAIAAAARAAUAAgAAAAIAAAARAAYAAgAAAAIAAAARAAQAAgAAAAIAAAARAAMAAgAAAAIAAAARAAIAAgAAAAIAAAAQAAMAAgAAAAIAAAAQAAQAAgAAAAIAAAAQAAIAAgAAAAIAAAAPAAIAAgAAAAIAAAAPAAMAAgAAAAIAAAAPAAQAAgAAAAIAAAAOAAQAAgAAAAIAAAAOAAUAAgAAAAIAAAAOAAMAAgAAAAIAAAAOAAIAAgAAAAIAAAANAAIAAgAAAAIAAAANAAMAAgAAAAIAAAANAAQAAgAAAAIAAAANAAUAAgAAAAIAAAAMAAMAAgAAAAIAAAAMAAQAAgAAAAIAAAAMAAUAAgAAAAIAAAAMAAIAAgAAAAIAAAALAAQAAgAAAAIAAAALAAUAAgAAAAIAAAALAAMAAgAAAAIAAAALAAIAAgAAAAIAAAAKAAQAAgAAAAIAAAAKAAMAAgAAAAIAAAAKAAIAAgAAAAIAAAAJAAIAAgAAAAIAAAAIAAMAAgAAAAIAAAAIAAQAAgAAAAIAAAAIAAUAAgAAAAIAAAAHAAUAAgAAAAIAAAAIAAIAAgAAAAIAAAAJAAQAAgAAAAIAAAAJAAMAAgAAAAIAAAAHAAIAAgAAAAIAAAAHAAMAAgAAAAIAAAAHAAQAAgAAAAIAAAAGAAMAAgAAAAIAAAAGAAQAAgAAAAIAAAAGAAUAAgAAAAIAAAAGAAIAAgAAAAIAAAAFAAMAAgAAAAIAAAAFAAQAAgAAAAIAAAAFAAUAAgAAAAIAAAAFAAIAAgAAAAIAAAAEAAQAAgAAAAIAAAAEAAUAAgAAAAIAAAAEAAMAAgAAAAIAAAAEAAIAAgAAAAIAAAADAAIAAgAAAAIAAAADAAMAAgAAAAIAAAADAAQAAgAAAAIAAAACAAQAAgAAAAIAAAACAAMAAgAAAAIAAAACAAIAAgAAAAIAAAABAAIAAgAAAAIAAAABAAMAAgAAAAIAAAABAAQAAgAAAAIAAAAAAAkAAgAAAAIAAAABAAkAAgAAAAIAAAACAAkAAgAAAAIAAAADAAkAAgAAAAIAAAAEAAkAAgAAAAIAAAAFAAkAAgAAAAIAAAAGAAkAAgAAAAIAAAAHAAkAAgAAAAIAAAAIAAkAAgAAAAIAAAAJAAkAAgAAAAIAAAAKAAkAAgAAAAIAAAALAAkAAgAAAAIAAAAMAAkAAgAAAAIAAAANAAkAAgAAAAIAAAAOAAkAAgAAAAIAAAAPAAkAAgAAAAIAAAAQAAkAAgAAAAIAAAARAAkAAgAAAAIAAAASAAkAAgAAAAIAAAAAAAoAAgAAAAIAAAABAAoAAgAAAAIAAAACAAoAAgAAAAIAAAADAAoAAgAAAAIAAAAEAAoAAgAAAAIAAAAFAAoAAgAAAAIAAAAGAAoAAgAAAAIAAAAHAAoAAgAAAAIAAAAIAAoAAgAAAAIAAAAJAAoAAgAAAAIAAAAKAAoAAgAAAAIAAAALAAoAAgAAAAIAAAAMAAoAAgAAAAIAAAANAAoAAgAAAAIAAAAOAAoAAgAAAAIAAAAPAAoAAgAAAAIAAAAQAAoAAgAAAAIAAAARAAoAAgAAAAIAAAASAAoAAgAAAAIAAAATAAoAAgAAAAIAAAAUAAsAAgAAAAIAAAATAAsAAgAAAAIAAAATAAwAAgAAAAIAAAASAAwAAgAAAAIAAAASAA0AAgAAAAIAAAARAA0AAgAAAAIAAAASAAsAAgAAAAIAAAARAAsAAgAAAAIAAAAQAAsAAgAAAAIAAAAPAAsAAgAAAAIAAAAOAAsAAgAAAAIAAAANAAwAAgAAAAIAAAANAA0AAgAAAAIAAAANAA4AAgAAAAIAAAAOAA4AAgAAAAIAAAAPAA4AAgAAAAIAAAAQAA4AAgAAAAIAAAATAA0AAgAAAAIAAAAUAAwAAgAAAAIAAAAVAAwAAgAAAAIAAAAVAAsAAgAAAAIAAAAOAAwAAgAAAAIAAAAMAAwAAgAAAAIAAAAMAA0AAgAAAAIAAAAMAA4AAgAAAAIAAAARAAwAAgAAAAIAAAAQAA0AAgAAAAIAAAAPAA0AAgAAAAIAAAAQAAwAAgAAAAIAAAAPAAwAAgAAAAIAAAAOAA0AAgAAAAIAAAALAA4AAgAAAAIAAAARAA4AAgAAAAIAAAANAAsAAgAAAAIAAAASAA4AAgAAAAIAAAATAA4AAgAAAAIAAAAUAAAAAgAAAAIAAAAUAAEAAgAAAAIAAAAUAAIAAgAAAAIAAAAUAAMAAgAAAAIAAAAUAAQAAgAAAAIAAAAUAAUAAgAAAAIAAAAUAAYAAgAAAAIAAAAUAAcAAgAAAAIAAAAUAAgAAgAAAAIAAAAUAAkAAgAAAAIAAAAUAAoAAgAAAAIAAAAUAA0AAgAAAAIAAAAUAA4AAgAAAAIAAAAVAAAAAgAAAAIAAAAVAAEAAgAAAAIAAAAVAAIAAgAAAAIAAAAVAAMAAgAAAAIAAAAVAAQAAgAAAAIAAAAVAAUAAgAAAAIAAAAVAAYAAgAAAAIAAAAVAAcAAgAAAAIAAAAVAAgAAgAAAAIAAAAVAAkAAgAAAAIAAAAVAAoAAgAAAAIAAAAVAA0AAgAAAAIAAAAVAA4AAgAAAAIAAAAWAAAAAgAAAAIAAAAWAAEAAgAAAAIAAAAWAAIAAgAAAAIAAAAWAAMAAgAAAAIAAAAWAAQAAgAAAAIAAAAWAAUAAgAAAAIAAAAWAAYAAgAAAAIAAAAWAAcAAgAAAAIAAAAWAAgAAgAAAAIAAAAWAAkAAgAAAAIAAAAWAAoAAgAAAAIAAAAWAAsAAgAAAAIAAAAWAAwAAgAAAAIAAAAWAA0AAgAAAAIAAAAWAA4AAgAAAAIAAAAXAAAAAgAAAAIAAAAXAAEAAgAAAAIAAAAXAAIAAgAAAAIAAAAXAAMAAgAAAAIAAAAXAAQAAgAAAAIAAAAXAAUAAgAAAAIAAAAXAAYAAgAAAAIAAAAXAAcAAgAAAAIAAAAXAAgAAgAAAAIAAAAXAAkAAgAAAAIAAAAXAAoAAgAAAAIAAAAXAAsAAgAAAAIAAAAXAAwAAgAAAAIAAAAXAA0AAgAAAAIAAAAXAA4AAgAAAAIAAAAYAAAAAgAAAAIAAAAYAAEAAgAAAAIAAAAYAAIAAgAAAAIAAAAYAAMAAgAAAAIAAAAYAAQAAgAAAAIAAAAYAAUAAgAAAAIAAAAYAAYAAgAAAAIAAAAYAAcAAgAAAAIAAAAYAAgAAgAAAAIAAAAYAAkAAgAAAAIAAAAYAAoAAgAAAAIAAAAYAAsAAgAAAAIAAAAYAAwAAgAAAAIAAAAYAA0AAgAAAAIAAAAYAA4AAgAAAAIAAAAZAAAAAgAAAAIAAAAZAAEAAgAAAAIAAAAZAAIAAgAAAAIAAAAZAAMAAgAAAAIAAAAZAAQAAgAAAAIAAAAZAAUAAgAAAAIAAAAZAAYAAgAAAAIAAAAZAAcAAgAAAAIAAAAZAAgAAgAAAAIAAAAZAAkAAgAAAAIAAAAZAAoAAgAAAAIAAAAZAAsAAgAAAAIAAAAZAAwAAgAAAAIAAAAZAA0AAgAAAAIAAAAZAA4AAgAAAAIAAAAaAAAAAgAAAAIAAAAaAAEAAgAAAAIAAAAaAAIAAgAAAAIAAAAaAAMAAgAAAAIAAAAaAAQAAgAAAAIAAAAaAAUAAgAAAAIAAAAaAAYAAgAAAAIAAAAaAAcAAgAAAAIAAAAaAAgAAgAAAAIAAAAaAAkAAgAAAAIAAAAaAAoAAgAAAAIAAAAaAAsAAgAAAAIAAAAaAAwAAgAAAAIAAAAaAA0AAgAAAAIAAAAaAA4AAgAAAAIAAAAbAAAAAgAAAAIAAAAbAAEAAgAAAAIAAAAbAAIAAgAAAAIAAAAbAAMAAgAAAAIAAAAbAAQAAgAAAAIAAAAbAAUAAgAAAAIAAAAbAAYAAgAAAAIAAAAbAAcAAgAAAAIAAAAbAAgAAgAAAAIAAAAbAAkAAgAAAAIAAAAbAAoAAgAAAAIAAAAbAAsAAgAAAAIAAAAbAAwAAgAAAAIAAAAbAA0AAgAAAAIAAAAbAA4AAgAAAAIAAAAcAAAAAgAAAAIAAAAcAAEAAgAAAAIAAAAcAAIAAgAAAAIAAAAcAAMAAgAAAAIAAAAcAAQAAgAAAAIAAAAcAAUAAgAAAAIAAAAcAAYAAgAAAAIAAAAcAAcAAgAAAAIAAAAcAAgAAgAAAAIAAAAcAAkAAgAAAAIAAAAcAAoAAgAAAAIAAAAcAAsAAgAAAAIAAAAcAAwAAgAAAAIAAAAcAA0AAgAAAAIAAAAcAA4AAgAAAAIAAAABAAsAAgAAAAIAAAABAAwAAgAAAAIAAAABAA0AAgAAAAIAAAABAA4AAgAAAAIAAAACAAsAAgAAAAIAAAACAAwAAgAAAAIAAAACAA0AAgAAAAIAAAACAA4AAgAAAAIAAAADAAsAAgAAAAIAAAADAAwAAgAAAAIAAAADAA0AAgAAAAIAAAADAA4AAgAAAAIAAAAEAAsAAgAAAAIAAAAEAAwAAgAAAAIAAAAEAA0AAgAAAAIAAAAEAA4AAgAAAAIAAAAFAAsAAgAAAAIAAAAFAAwAAgAAAAIAAAAFAA0AAgAAAAIAAAAFAA4AAgAAAAIAAAAGAAsAAgAAAAIAAAAGAAwAAgAAAAIAAAAGAA0AAgAAAAIAAAAGAA4AAgAAAAIAAAAHAAsAAgAAAAIAAAAHAAwAAgAAAAIAAAAHAA0AAgAAAAIAAAAHAA4AAgAAAAIAAAAIAAsAAgAAAAIAAAAIAAwAAgAAAAIAAAAIAA0AAgAAAAIAAAAIAA4AAgAAAAIAAAAJAAsAAgAAAAIAAAAJAAwAAgAAAAIAAAAJAA0AAgAAAAIAAAAJAA4AAgAAAAIAAAAKAAsAAgAAAAIAAAAKAAwAAgAAAAIAAAAKAA0AAgAAAAIAAAAKAA4AAgAAAAIAAAALAAsAAgAAAAIAAAALAAwAAgAAAAIAAAALAA0AAgAAAAIAAAAMAAsAAgAAAAIAAAAAAAsAAgAAAAIAAAAAAAwAAgAAAAIAAAAAAA0AAgAAAAIAAAAAAA4AAgAAAAIAAAD/////AgAAAAIAAAD//wAAAgAAAAIAAAD//wEAAgAAAAIAAAD//wIAAgAAAAIAAAD//wMAAgAAAAIAAAD//wQAAgAAAAIAAAD//wUAAgAAAAIAAAD//wYAAgAAAAIAAAD//wcAAgAAAAIAAAD//wgAAgAAAAIAAAD//wkAAgAAAAIAAAD//woAAgAAAAIAAAD//wsAAgAAAAIAAAD//wwAAgAAAAIAAAD//w0AAgAAAAIAAAD//w4AAgAAAAIAAAAAAP//AgAAAAIAAAABAP//AgAAAAIAAAACAP//AgAAAAIAAAADAP//AgAAAAIAAAAEAP//AgAAAAIAAAAFAP//AgAAAAIAAAAGAP//AgAAAAIAAAAHAP//AgAAAAIAAAAIAP//AgAAAAIAAAAJAP//AgAAAAIAAAAKAP//AgAAAAIAAAALAP//AgAAAAIAAAAMAP//AgAAAAIAAAANAP//AgAAAAIAAAAOAP//AgAAAAIAAAAPAP//AgAAAAIAAAAQAP//AgAAAAIAAAARAP//AgAAAAIAAAASAP//AgAAAAIAAAATAP//AgAAAAIAAAAUAP//AgAAAAIAAAAVAP//AgAAAAIAAAAWAP//AgAAAAIAAAAXAP//AgAAAAIAAAAYAP//AgAAAAIAAAAZAP//AgAAAAIAAAAaAP//AgAAAAIAAAAbAP//AgAAAAIAAAAcAP//AgAAAAIAAAA=")
+tile_set = SubResource("TileSet_s3tue")
+collision_enabled = false
+
+[node name="Background(NoOrb)" type="TileMapLayer" parent="Map"]
+material = SubResource("ShaderMaterial_6npyu")
+use_parent_material = true
+position = Vector2(16, 16)
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAEAAAABAAAAAgAAAAEAAAACAAAAAgAAAAEAAAADAAAAAgAAAAEAAAAEAAAAAgAAAAEAAAAFAAAAAgAAAAEAAAAGAAAAAgAAAAEAAAAHAAAAAgAAAAEAAAAIAAAAAgAAAAEAAAAJAAAAAgAAAAEAAAAKAAAAAgAAAAEAAAALAAAAAgAAAAEAAAAMAAAAAgAAAAEAAAANAAAAAgAAAAEAAAAOAAAAAgAAAAEAAAAPAAAAAgAAAAEAAAAQAAAAAgAAAAEAAAARAAAAAgAAAAEAAAASAAAAAgAAAAEAAAATAAAAAgAAAAEAAAATAAEAAgAAAAEAAAATAAIAAgAAAAEAAAATAAMAAgAAAAEAAAATAAQAAgAAAAEAAAATAAUAAgAAAAEAAAATAAYAAgAAAAEAAAATAAcAAgAAAAEAAAATAAgAAgAAAAEAAAATAAkAAgAAAAEAAAAAAAgAAgAAAAEAAAAAAAcAAgAAAAEAAAAAAAYAAgAAAAEAAAAAAAUAAgAAAAEAAAAAAAQAAgAAAAEAAAAAAAMAAgAAAAEAAAAAAAIAAgAAAAEAAAAAAAEAAgAAAAEAAAABAAEAAgAAAAEAAAACAAEAAgAAAAEAAAADAAEAAgAAAAEAAAAEAAEAAgAAAAEAAAAFAAEAAgAAAAEAAAAGAAEAAgAAAAEAAAAHAAEAAgAAAAEAAAAIAAEAAgAAAAEAAAAJAAEAAgAAAAEAAAAKAAEAAgAAAAEAAAALAAEAAgAAAAEAAAAMAAEAAgAAAAEAAAANAAEAAgAAAAEAAAAOAAEAAgAAAAEAAAAPAAEAAgAAAAEAAAAQAAEAAgAAAAEAAAARAAEAAgAAAAEAAAASAAEAAgAAAAEAAAASAAIAAgAAAAEAAAASAAMAAgAAAAEAAAASAAQAAgAAAAEAAAASAAUAAgAAAAEAAAASAAYAAgAAAAEAAAASAAcAAgAAAAEAAAASAAgAAgAAAAEAAAARAAgAAgAAAAEAAAAQAAgAAgAAAAEAAAAPAAgAAgAAAAEAAAAOAAgAAgAAAAEAAAANAAgAAgAAAAEAAAAMAAgAAgAAAAEAAAALAAgAAgAAAAEAAAAKAAgAAgAAAAEAAAAJAAgAAgAAAAEAAAAIAAgAAgAAAAEAAAAHAAgAAgAAAAEAAAAGAAgAAgAAAAEAAAAFAAgAAgAAAAEAAAAEAAgAAgAAAAEAAAADAAgAAgAAAAEAAAACAAgAAgAAAAEAAAABAAgAAgAAAAEAAAABAAYAAgAAAAEAAAABAAcAAgAAAAEAAAACAAcAAgAAAAEAAAAGAAcAAgAAAAEAAAAHAAcAAgAAAAEAAAAIAAcAAgAAAAEAAAAJAAcAAgAAAAEAAAAKAAcAAgAAAAEAAAALAAcAAgAAAAEAAAAMAAcAAgAAAAEAAAAMAAYAAgAAAAEAAAANAAYAAgAAAAEAAAAOAAYAAgAAAAEAAAAPAAYAAgAAAAEAAAAQAAYAAgAAAAEAAAAQAAcAAgAAAAEAAAARAAcAAgAAAAEAAAAPAAcAAgAAAAEAAAAOAAcAAgAAAAEAAAANAAcAAgAAAAEAAAAFAAcAAgAAAAEAAAAEAAcAAgAAAAEAAAADAAcAAgAAAAEAAAABAAUAAgAAAAEAAAACAAUAAgAAAAEAAAADAAUAAgAAAAEAAAADAAYAAgAAAAEAAAAEAAYAAgAAAAEAAAAFAAYAAgAAAAEAAAAGAAYAAgAAAAEAAAAHAAYAAgAAAAEAAAAIAAYAAgAAAAEAAAAJAAUAAgAAAAEAAAAKAAUAAgAAAAEAAAAJAAYAAgAAAAEAAAACAAYAAgAAAAEAAAAKAAYAAgAAAAEAAAALAAYAAgAAAAEAAAAPAAUAAgAAAAEAAAAQAAUAAgAAAAEAAAARAAUAAgAAAAEAAAARAAYAAgAAAAEAAAARAAQAAgAAAAEAAAARAAMAAgAAAAEAAAARAAIAAgAAAAEAAAAQAAMAAgAAAAEAAAAQAAQAAgAAAAEAAAAQAAIAAgAAAAEAAAAPAAIAAgAAAAEAAAAPAAMAAgAAAAEAAAAPAAQAAgAAAAEAAAAOAAQAAgAAAAEAAAAOAAUAAgAAAAEAAAAOAAMAAgAAAAEAAAAOAAIAAgAAAAEAAAANAAIAAgAAAAEAAAANAAMAAgAAAAEAAAANAAQAAgAAAAEAAAANAAUAAgAAAAEAAAAMAAMAAgAAAAEAAAAMAAQAAgAAAAEAAAAMAAUAAgAAAAEAAAAMAAIAAgAAAAEAAAALAAQAAgAAAAEAAAALAAUAAgAAAAEAAAALAAMAAgAAAAEAAAALAAIAAgAAAAEAAAAKAAQAAgAAAAEAAAAKAAMAAgAAAAEAAAAKAAIAAgAAAAEAAAAJAAIAAgAAAAEAAAAIAAMAAgAAAAEAAAAIAAQAAgAAAAEAAAAIAAUAAgAAAAEAAAAHAAUAAgAAAAEAAAAIAAIAAgAAAAEAAAAJAAQAAgAAAAEAAAAJAAMAAgAAAAEAAAAHAAIAAgAAAAEAAAAHAAMAAgAAAAEAAAAHAAQAAgAAAAEAAAAGAAMAAgAAAAEAAAAGAAQAAgAAAAEAAAAGAAUAAgAAAAEAAAAGAAIAAgAAAAEAAAAFAAMAAgAAAAEAAAAFAAQAAgAAAAEAAAAFAAUAAgAAAAEAAAAFAAIAAgAAAAEAAAAEAAQAAgAAAAEAAAAEAAUAAgAAAAEAAAAEAAMAAgAAAAEAAAAEAAIAAgAAAAEAAAADAAIAAgAAAAEAAAADAAMAAgAAAAEAAAADAAQAAgAAAAEAAAACAAQAAgAAAAEAAAACAAMAAgAAAAEAAAACAAIAAgAAAAEAAAABAAIAAgAAAAEAAAABAAMAAgAAAAEAAAABAAQAAgAAAAEAAAAAAAkAAgAAAAEAAAABAAkAAgAAAAEAAAACAAkAAgAAAAEAAAADAAkAAgAAAAEAAAAEAAkAAgAAAAEAAAAFAAkAAgAAAAEAAAAGAAkAAgAAAAEAAAAHAAkAAgAAAAEAAAAIAAkAAgAAAAEAAAAJAAkAAgAAAAEAAAAKAAkAAgAAAAEAAAALAAkAAgAAAAEAAAAMAAkAAgAAAAEAAAANAAkAAgAAAAEAAAAOAAkAAgAAAAEAAAAPAAkAAgAAAAEAAAAQAAkAAgAAAAEAAAARAAkAAgAAAAEAAAASAAkAAgAAAAEAAAAAAAoAAgAAAAEAAAACAAoAAgAAAAEAAAADAAoAAgAAAAEAAAAEAAoAAgAAAAEAAAAFAAoAAgAAAAEAAAAGAAoAAgAAAAEAAAAHAAoAAgAAAAEAAAAIAAoAAgAAAAEAAAAJAAoAAgAAAAEAAAAKAAoAAgAAAAEAAAALAAoAAgAAAAEAAAAMAAoAAgAAAAEAAAANAAoAAgAAAAEAAAAOAAoAAgAAAAEAAAAPAAoAAgAAAAEAAAAQAAoAAgAAAAEAAAARAAoAAgAAAAEAAAASAAoAAgAAAAEAAAATAAoAAgAAAAEAAAAUAAsAAgAAAAEAAAATAAsAAgAAAAEAAAATAAwAAgAAAAEAAAASAAwAAgAAAAEAAAASAA0AAgAAAAEAAAARAA0AAgAAAAEAAAASAAsAAgAAAAEAAAARAAsAAgAAAAEAAAAQAAsAAgAAAAEAAAAPAAsAAgAAAAEAAAAOAAsAAgAAAAEAAAANAAwAAgAAAAEAAAANAA0AAgAAAAEAAAANAA4AAgAAAAEAAAAOAA4AAgAAAAEAAAAPAA4AAgAAAAEAAAAQAA4AAgAAAAEAAAATAA0AAgAAAAEAAAAUAAwAAgAAAAEAAAAVAAwAAgAAAAEAAAAVAAsAAgAAAAEAAAAOAAwAAgAAAAEAAAAMAAwAAgAAAAEAAAAMAA0AAgAAAAEAAAAMAA4AAgAAAAEAAAARAAwAAgAAAAEAAAAQAA0AAgAAAAEAAAAPAA0AAgAAAAEAAAAQAAwAAgAAAAEAAAAPAAwAAgAAAAEAAAAOAA0AAgAAAAEAAAALAA4AAgAAAAEAAAARAA4AAgAAAAEAAAANAAsAAgAAAAEAAAASAA4AAgAAAAEAAAATAA4AAgAAAAEAAAAUAAAAAgAAAAEAAAAUAAEAAgAAAAEAAAAUAAIAAgAAAAEAAAAUAAMAAgAAAAEAAAAUAAQAAgAAAAEAAAAUAAUAAgAAAAEAAAAUAAYAAgAAAAEAAAAUAAcAAgAAAAEAAAAUAAgAAgAAAAEAAAAUAAkAAgAAAAEAAAAUAAoAAgAAAAEAAAAUAA0AAgAAAAEAAAAUAA4AAgAAAAEAAAAVAAAAAgAAAAEAAAAVAAEAAgAAAAEAAAAVAAIAAgAAAAEAAAAVAAMAAgAAAAEAAAAVAAQAAgAAAAEAAAAVAAUAAgAAAAEAAAAVAAYAAgAAAAEAAAAVAAcAAgAAAAEAAAAVAAgAAgAAAAEAAAAVAAkAAgAAAAEAAAAVAAoAAgAAAAEAAAAVAA0AAgAAAAEAAAAVAA4AAgAAAAEAAAAWAAAAAgAAAAEAAAAWAAEAAgAAAAEAAAAWAAIAAgAAAAEAAAAWAAMAAgAAAAEAAAAWAAQAAgAAAAEAAAAWAAUAAgAAAAEAAAAWAAYAAgAAAAEAAAAWAAcAAgAAAAEAAAAWAAgAAgAAAAEAAAAWAAkAAgAAAAEAAAAWAAoAAgAAAAEAAAAWAAsAAgAAAAEAAAAWAAwAAgAAAAEAAAAWAA0AAgAAAAEAAAAWAA4AAgAAAAEAAAAXAAAAAgAAAAEAAAAXAAEAAgAAAAEAAAAXAAIAAgAAAAEAAAAXAAMAAgAAAAEAAAAXAAQAAgAAAAEAAAAXAAUAAgAAAAEAAAAXAAYAAgAAAAEAAAAXAAcAAgAAAAEAAAAXAAgAAgAAAAEAAAAXAAkAAgAAAAEAAAAXAAoAAgAAAAEAAAAXAAsAAgAAAAEAAAAXAAwAAgAAAAEAAAAXAA0AAgAAAAEAAAAXAA4AAgAAAAEAAAAYAAAAAgAAAAEAAAAYAAEAAgAAAAEAAAAYAAIAAgAAAAEAAAAYAAMAAgAAAAEAAAAYAAQAAgAAAAEAAAAYAAUAAgAAAAEAAAAYAAYAAgAAAAEAAAAYAAcAAgAAAAEAAAAYAAgAAgAAAAEAAAAYAAkAAgAAAAEAAAAYAAoAAgAAAAEAAAAYAAsAAgAAAAEAAAAYAAwAAgAAAAEAAAAYAA0AAgAAAAEAAAAYAA4AAgAAAAEAAAAZAAAAAgAAAAEAAAAZAAEAAgAAAAEAAAAZAAIAAgAAAAEAAAAZAAMAAgAAAAEAAAAZAAQAAgAAAAEAAAAZAAUAAgAAAAEAAAAZAAYAAgAAAAEAAAAZAAcAAgAAAAEAAAAZAAgAAgAAAAEAAAAZAAkAAgAAAAEAAAAZAAoAAgAAAAEAAAAZAAsAAgAAAAEAAAAZAAwAAgAAAAEAAAAZAA0AAgAAAAEAAAAZAA4AAgAAAAEAAAAaAAAAAgAAAAEAAAAaAAEAAgAAAAEAAAAaAAIAAgAAAAEAAAAaAAMAAgAAAAEAAAAaAAQAAgAAAAEAAAAaAAUAAgAAAAEAAAAaAAYAAgAAAAEAAAAaAAcAAgAAAAEAAAAaAAgAAgAAAAEAAAAaAAkAAgAAAAEAAAAaAAoAAgAAAAEAAAAaAAsAAgAAAAEAAAAaAAwAAgAAAAEAAAAaAA0AAgAAAAEAAAAaAA4AAgAAAAEAAAAbAAAAAgAAAAEAAAAbAAEAAgAAAAEAAAAbAAIAAgAAAAEAAAAbAAMAAgAAAAEAAAAbAAQAAgAAAAEAAAAbAAUAAgAAAAEAAAAbAAYAAgAAAAEAAAAbAAcAAgAAAAEAAAAbAAgAAgAAAAEAAAAbAAkAAgAAAAEAAAAbAAoAAgAAAAEAAAAbAAsAAgAAAAEAAAAbAAwAAgAAAAEAAAAbAA0AAgAAAAEAAAAbAA4AAgAAAAEAAAAcAAAAAgAAAAEAAAAcAAEAAgAAAAEAAAAcAAIAAgAAAAEAAAAcAAMAAgAAAAEAAAAcAAQAAgAAAAEAAAAcAAUAAgAAAAEAAAAcAAYAAgAAAAEAAAAcAAcAAgAAAAEAAAAcAAgAAgAAAAEAAAAcAAkAAgAAAAEAAAAcAAoAAgAAAAEAAAAcAAsAAgAAAAEAAAAcAAwAAgAAAAEAAAAcAA0AAgAAAAEAAAAcAA4AAgAAAAEAAAABAAsAAgAAAAEAAAABAAwAAgAAAAEAAAABAA0AAgAAAAEAAAABAA4AAgAAAAEAAAACAAsAAgAAAAEAAAACAAwAAgAAAAEAAAACAA0AAgAAAAEAAAACAA4AAgAAAAEAAAADAAsAAgAAAAEAAAADAAwAAgAAAAEAAAADAA0AAgAAAAEAAAADAA4AAgAAAAEAAAAEAAsAAgAAAAEAAAAEAAwAAgAAAAEAAAAEAA0AAgAAAAEAAAAEAA4AAgAAAAEAAAAFAAsAAgAAAAEAAAAFAAwAAgAAAAEAAAAFAA0AAgAAAAEAAAAFAA4AAgAAAAEAAAAGAAsAAgAAAAEAAAAGAAwAAgAAAAEAAAAGAA0AAgAAAAEAAAAGAA4AAgAAAAEAAAAHAAsAAgAAAAEAAAAHAAwAAgAAAAEAAAAHAA0AAgAAAAEAAAAHAA4AAgAAAAEAAAAIAAsAAgAAAAEAAAAIAAwAAgAAAAEAAAAIAA0AAgAAAAEAAAAIAA4AAgAAAAEAAAAJAAsAAgAAAAEAAAAJAAwAAgAAAAEAAAAJAA0AAgAAAAEAAAAJAA4AAgAAAAEAAAAKAAsAAgAAAAEAAAAKAAwAAgAAAAEAAAAKAA0AAgAAAAEAAAAKAA4AAgAAAAEAAAALAAsAAgAAAAEAAAALAAwAAgAAAAEAAAALAA0AAgAAAAEAAAAMAAsAAgAAAAEAAAAAAAsAAgAAAAEAAAAAAAwAAgAAAAEAAAAAAA0AAgAAAAEAAAAAAA4AAgAAAAEAAAABAAoAAgAAAAEAAAD/////AgAAAAEAAAD//wAAAgAAAAEAAAD//wEAAgAAAAEAAAD//wIAAgAAAAEAAAD//wMAAgAAAAEAAAD//wQAAgAAAAEAAAD//wUAAgAAAAEAAAD//wYAAgAAAAEAAAD//wcAAgAAAAEAAAD//wgAAgAAAAEAAAD//wkAAgAAAAEAAAD//woAAgAAAAEAAAD//wsAAgAAAAEAAAD//wwAAgAAAAEAAAD//w0AAgAAAAEAAAD//w4AAgAAAAEAAAAAAP//AgAAAAEAAAABAP//AgAAAAEAAAACAP//AgAAAAEAAAADAP//AgAAAAEAAAAEAP//AgAAAAEAAAAFAP//AgAAAAEAAAAGAP//AgAAAAEAAAAHAP//AgAAAAEAAAAIAP//AgAAAAEAAAAJAP//AgAAAAEAAAAKAP//AgAAAAEAAAALAP//AgAAAAEAAAAMAP//AgAAAAEAAAANAP//AgAAAAEAAAAOAP//AgAAAAEAAAAPAP//AgAAAAEAAAAQAP//AgAAAAEAAAARAP//AgAAAAEAAAASAP//AgAAAAEAAAATAP//AgAAAAEAAAAUAP//AgAAAAEAAAAVAP//AgAAAAEAAAAWAP//AgAAAAEAAAAXAP//AgAAAAEAAAAYAP//AgAAAAEAAAAZAP//AgAAAAEAAAAaAP//AgAAAAEAAAAbAP//AgAAAAEAAAAcAP//AgAAAAEAAAA=")
+tile_set = SubResource("TileSet_x76xo")
+collision_enabled = false
+script = ExtResource("19_2vfvw")
+
+[node name="AllLayer(Walls)" type="TileMapLayer" parent="Map"]
+z_index = 4
+material = SubResource("ShaderMaterial_un60j")
+use_parent_material = true
+position = Vector2(16, 16)
+tile_map_data = PackedByteArray("AAD+//7/AgAAAAQAAAD///7/AgABAAQAAAAAAP7/AgACAAQAAAABAP7/AgABAAQAAAACAP7/AgADAAQAAAADAP7/AgABAAQAAAAEAP7/AgABAAQAAAAFAP7/AgABAAQAAAAGAP7/AgABAAQAAAAHAP7/AgACAAQAAAAIAP7/AgACAAQAAAAJAP7/AgABAAQAAAAKAP7/AgADAAQAAAALAP7/AgABAAQAAAAMAP7/AgABAAQAAAANAP7/AgACAAQAAAAOAP7/AgABAAQAAAAPAP7/AgABAAQAAAAQAP7/AgABAAQAAAARAP7/AgADAAQAAAASAP7/AgABAAQAAAATAP7/AgABAAQAAAAUAP7/AgACAAQAAAAVAP7/AgABAAQAAAAWAP7/AgABAAQAAAAXAP7/AgABAAQAAAAYAP7/AgABAAQAAAAZAP7/AgABAAQAAAAaAP7/AgADAAQAAAAbAP7/AgABAAQAAAAcAP7/AgABAAQAAAAdAP7/AgAFAAQAAAAdAP//AgAEAAUAAAAdAAAAAgAFAAUAAAAdAAEAAgAFAAUAAAAdAAIAAgADAAUAAAAdAAMAAgAFAAUAAAAdAAQAAgAFAAUAAAAdAAUAAgAFAAUAAAAdAAYAAgADAAUAAAAdAAcAAgABAAIAAAAdAAgAAgAFAAUAAAAdAAkAAgAEAAUAAAAdAAoAAgAFAAUAAAAdAAsAAgADAAUAAAAdAAwAAgAFAAUAAAAdAA0AAgAEAAUAAAD+////AgAAAAUAAAD+/wAAAgACAAUAAAD+/wEAAgAAAAUAAAD+/wIAAgABAAUAAAD+/wMAAgAAAAUAAAD+/wQAAgAAAAUAAAD+/wUAAgAAAAUAAAD+/wYAAgAAAAUAAAD+/wcAAgACAAUAAAD+/wgAAgAAAAUAAAD+/wkAAgACAAUAAAD+/woAAgAAAAUAAAD+/wsAAgAAAAUAAAD+/wwAAgABAAUAAAD+/w0AAgAAAAUAAAD+/w4AAgAAAAYAAAAdAA4AAgAFAAYAAAAdAA8AAgAFAAcAAAD+/w8AAgAAAAcAAAD//w8AAgAEAAcAAAAAAA8AAgACAAcAAAABAA8AAgABAAcAAAACAA8AAgABAAcAAAADAA8AAgAEAAcAAAAEAA8AAgACAAcAAAAFAA8AAgABAAcAAAAGAA8AAgABAAcAAAAHAA8AAgABAAcAAAAIAA8AAgADAAcAAAAJAA8AAgAEAAcAAAAKAA8AAgABAAcAAAALAA8AAgABAAcAAAAMAA8AAgABAAcAAAANAA8AAgABAAcAAAAOAA8AAgABAAcAAAAPAA8AAgACAAcAAAAQAA8AAgABAAcAAAARAA8AAgADAAcAAAASAA8AAgAEAAcAAAATAA8AAgADAAcAAAAUAA8AAgABAAcAAAAVAA8AAgABAAcAAAAWAA8AAgABAAcAAAAXAA8AAgABAAcAAAAYAA8AAgABAAcAAAAZAA8AAgABAAcAAAAaAA8AAgADAAcAAAAbAA8AAgABAAcAAAAcAA8AAgABAAcAAAAaAAsAAgACAAMAAAAZAAsAAgABAAMAAAAYAAsAAgABAAMAAAAXAAsAAgADAAMAAAAXAAoAAgACAAEAAAAXAAkAAgACAAEAAAAXAAgAAgACAAEAAAAXAAcAAgADAAEAAAAYAAcAAgABAAMAAAAZAAcAAgABAAMAAAAaAAcAAgABAAMAAAAbAAcAAgABAAMAAAAcAAcAAgABAAMAAAA=")
+tile_set = ExtResource("21_hnqcj")
+script = ExtResource("19_2vfvw")
+
+[node name="BaseLayer(YesOrb)" type="TileMapLayer" parent="Map"]
+z_index = -1
+tile_map_data = PackedByteArray("AAABAA8AAgAAAAMAAAACAA8AAgABAAMAAAADAA8AAgACAAMAAAABAAwAAgACAAMAAAAAAAwAAgAAAAMAAAABAAcAAgACAAMAAAAAAAcAAgAAAAMAAAAFAAcAAgACAAEAAAAFAAgAAgAFAAIAAAAEAAgAAgAAAAMAAAAFAAkAAgACAAEAAAAFAAoAAgACAAEAAAAFAAsAAgADAAMAAAAGAAsAAgABAAMAAAAHAAsAAgABAAMAAAAIAAsAAgABAAMAAAAJAAsAAgABAAMAAAAKAAsAAgABAAMAAAALAAsAAgABAAMAAAAMAAsAAgABAAMAAAANAAsAAgABAAMAAAAOAAsAAgABAAMAAAAPAAsAAgABAAMAAAAQAAsAAgABAAMAAAAUAAsAAgAFAAMAAAATAAsAAgABAAMAAAASAAsAAgABAAMAAAARAAsAAgABAAMAAAAUAAoAAgACAAEAAAAUAAkAAgACAAEAAAAUAAgAAgACAAEAAAAUAAcAAgACAAEAAAAFAAMAAgAFAAEAAAAEAAMAAgAAAAMAAAAFAAQAAgACAAEAAAAFAAUAAgACAAEAAAAFAAYAAgACAAEAAAAUAAUAAgACAAEAAAAUAAYAAgACAAEAAAAWAAMAAgABAAcAAAAXAAMAAgAHAAAAAAAWAAQAAgABAAQAAAAVAAMAAgABAAcAAAAVAAQAAgABAAQAAAAUAAQAAgABAAAAAAATAAQAAgAGAAEAAAATAAMAAgAGAAIAAAAUAAMAAgABAAcAAAASAAMAAgADAAMAAAASAAIAAgAFAAEAAAARAAIAAgABAAMAAAAQAAIAAgABAAMAAAAPAAIAAgABAAMAAAAOAAIAAgABAAMAAAANAAIAAgABAAMAAAAMAAIAAgABAAMAAAALAAIAAgAAAAMAAAAJAAIAAgACAAEAAAAJAAEAAgACAAEAAAAJAAAAAgACAAAAAAAJAAMAAgACAAEAAAAJAAQAAgACAAEAAAAJAAUAAgACAAEAAAAJAAYAAgADAAIAAAAXAAQAAgAHAAUAAAAYAAQAAgABAAMAAAAZAAQAAgABAAMAAAAcAAMAAgACAAMAAAAbAAMAAgAHAAIAAAAbAAQAAgAHAAEAAAAaAAQAAgAGAAUAAAAJAAgAAgACAAIAAAAKAAYAAgABAAMAAAAQAAcAAgADAAMAAAARAAcAAgAFAAEAAAARAAgAAgACAAIAAAAQAAYAAgAFAAEAAAAJAAcAAgACAAEAAAALAAYAAgACAAMAAAAPAAYAAgABAAMAAAAOAAYAAgAAAAMAAAAaAAMAAgAGAAAAAAA=")
+tile_set = ExtResource("22_alvlu")
+
+[node name="BaseLayer(NoOrb)" type="TileMapLayer" parent="Map"]
+tile_map_data = PackedByteArray("AAABAA8AAgAAAAMAAAACAA8AAgABAAMAAAADAA8AAgACAAMAAAABAAwAAgACAAMAAAAAAAwAAgAAAAMAAAABAAcAAgACAAMAAAAAAAcAAgAAAAMAAAAEAAgAAgAAAAMAAAAFAAgAAgAFAAIAAAAFAAMAAgAFAAEAAAAFAAQAAgACAAEAAAAFAAUAAgACAAEAAAAFAAYAAgACAAEAAAAFAAcAAgACAAEAAAAEAAMAAgAAAAMAAAAFAAkAAgACAAEAAAAFAAoAAgACAAEAAAAFAAsAAgADAAMAAAAGAAsAAgABAAMAAAAHAAsAAgABAAMAAAAIAAsAAgABAAMAAAAJAAsAAgABAAMAAAAKAAsAAgABAAMAAAALAAsAAgABAAMAAAAOAAsAAgABAAMAAAAMAAsAAgABAAMAAAANAAsAAgABAAMAAAAPAAsAAgABAAMAAAAQAAsAAgABAAMAAAARAAsAAgABAAMAAAASAAsAAgABAAMAAAATAAsAAgABAAMAAAAUAAsAAgAFAAMAAAAUAAoAAgACAAEAAAAUAAkAAgACAAEAAAAUAAgAAgACAAEAAAAUAAcAAgACAAEAAAAUAAYAAgACAAEAAAAUAAUAAgACAAAAAAAUAAQAAgABAAQAAAAUAAMAAgABAAcAAAAVAAMAAgABAAcAAAAVAAQAAgABAAQAAAAWAAQAAgABAAQAAAAWAAMAAgABAAcAAAAXAAMAAgAHAAAAAAAXAAQAAgAHAAUAAAAYAAQAAgABAAMAAAAZAAQAAgABAAMAAAAaAAQAAgAGAAUAAAAbAAQAAgAHAAEAAAAbAAMAAgAHAAIAAAAcAAMAAgACAAMAAAATAAQAAgAGAAEAAAATAAMAAgAGAAIAAAASAAMAAgADAAMAAAASAAIAAgAFAAEAAAARAAIAAgABAAMAAAAQAAIAAgABAAMAAAAPAAIAAgABAAMAAAAOAAIAAgABAAMAAAANAAIAAgABAAMAAAAMAAIAAgABAAMAAAALAAIAAgAAAAMAAAAJAAAAAgACAAAAAAAJAAEAAgACAAEAAAAJAAIAAgACAAEAAAAJAAMAAgACAAEAAAAJAAQAAgACAAEAAAAJAAUAAgACAAEAAAAJAAYAAgADAAIAAAAJAAcAAgACAAEAAAAJAAgAAgACAAIAAAAKAAYAAgABAAMAAAAQAAcAAgADAAMAAAAQAAYAAgAFAAEAAAARAAcAAgAFAAEAAAARAAgAAgACAAIAAAALAAYAAgACAAMAAAAPAAYAAgABAAMAAAAOAAYAAgAAAAMAAAAaAAMAAgAGAAAAAAA=")
+tile_set = ExtResource("23_jxbe6")
+
+[node name="OrbLayer(YesOrb)" type="TileMapLayer" parent="Map"]
+z_index = -1
+tile_map_data = PackedByteArray("AAAcAAwAAgAAAAMAAAAdAAwAAgACAAMAAAA=")
+tile_set = ExtResource("24_57hqd")
+
+[node name="OrbLayer(NoOrb)" type="TileMapLayer" parent="Map"]
+tile_map_data = PackedByteArray("AAAdAAwAAgACAAMAAAAcAAwAAgAAAAMAAAA=")
+tile_set = ExtResource("25_0ke12")
+
+[node name="TheORB" type="RigidBody2D" parent="."]
+z_index = 3
+position = Vector2(52, 249)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("26_bnv6i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TheORB"]
+shape = SubResource("CircleShape2D_sedmo")
+
+[node name="TheORBSprite" type="Sprite2D" parent="TheORB"]
+z_index = 3
+position = Vector2(0, -1)
+texture = ExtResource("27_gsptd")
+hframes = 14
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TheORB/TheORBSprite"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_7gr6y")
+}
+
+[node name="Spikes" type="Node2D" parent="."]
+
+[node name="SpikeOrbLayerNoOrb" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(-55, 215)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 8
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeOrbLayerNoOrb"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeOrbLayerNoOrb/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeOrbLayerYesOrb" type="Sprite2D" parent="Spikes"]
+position = Vector2(-55, 215)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 9
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeOrbLayerYesOrb"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeOrbLayerYesOrb/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(-80, 215)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(-80, 215)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb2" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(40, 120)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb2"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb2/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb2" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(40, 120)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb2"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb2/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb14" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(88, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb14"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb14/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb26" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(88, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb26"]
+rotation = 3.1415927
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb26/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb15" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(104, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb15"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb15/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb27" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(104, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb27"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb27/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb16" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(344, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb16"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb16/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb28" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(344, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb28"]
+rotation = 3.1415927
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb28/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb17" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(360, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb17"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb17/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb29" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(360, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb29"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb29/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb18" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(408, 72)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb18"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb18/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb30" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(408, 72)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb30"]
+rotation = 3.1415927
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb30/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb19" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(424, 72)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb19"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb19/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb31" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(424, 72)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb31"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb31/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb21" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(392, 184)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb21"]
+rotation = 4.712389
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb21/Area2D"]
+rotation = 4.712389
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb33" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(392, 184)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb33"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb33/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb22" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(392, 168)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb22"]
+rotation = 1.5707964
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb22/Area2D"]
+rotation = 4.712389
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb34" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(392, 168)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb34"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb34/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb23" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(312, 136)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb23"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb23/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb35" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(312, 136)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb35"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb35/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb24" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(312, 152)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb24"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb24/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb36" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(312, 152)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb36"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb36/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb31" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(152, 136)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb31"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb31/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb43" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(152, 136)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb43"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb43/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb32" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(152, 152)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb32"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb32/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb44" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(152, 152)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb44"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb44/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb33" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(120, 88)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb33"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb33/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb45" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(120, 88)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb45"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb45/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb35" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(24, 152)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb35"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb35/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb47" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(24, 152)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb47"]
+rotation = 3.1415927
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb47/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb36" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(40, 152)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb36"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb36/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb48" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(40, 152)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb48"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb48/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb34" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(120, 104)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb34"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb34/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb46" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(120, 104)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb46"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb46/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb19" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(136, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb19"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb19/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb20" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(152, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb20"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb20/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb21" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(184, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb21"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb21/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb22" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(200, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb22"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb22/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb23" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(216, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb23"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb23/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb24" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(280, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb24"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb24/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb25" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(344, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb25"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb25/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb37" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(232, 184)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb37"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb37/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb49" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(232, 184)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb49"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb49/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb4" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(136, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb4"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb4/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb4" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(136, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb4"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb4/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb5" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(152, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb5"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb5/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb5" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(168, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb5"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb5/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb6" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(168, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb6"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb6/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb6" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(184, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb6"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb6/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb7" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(184, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb7"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb7/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb7" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(200, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb7"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb7/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb8" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(200, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb8"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb8/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb9" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(216, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb9"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb9/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb8" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(232, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb8"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb8/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb10" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(232, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb10"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb10/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb9" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(248, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb9"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb9/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb11" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(248, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb11"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb11/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb10" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(264, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb10"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb10/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb12" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(264, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb12"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb12/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb13" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(280, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb13"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb13/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb11" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(296, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb11"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb11/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb14" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(296, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb14"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb14/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb12" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(312, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb12"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb12/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb15" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(312, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb15"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb15/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb13" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(328, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb13"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb13/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb16" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(328, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb16"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb16/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb17" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(344, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb17"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb17/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeAllLayer" type="Sprite2D" parent="Spikes"]
+z_index = 1
+position = Vector2(-173, 250)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeAllLayer"]
+collision_layer = 13
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeAllLayer/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[connection signal="body_entered" from="Spikes/SpikeOrbLayerNoOrb/Area2D" to="Spikes/SpikeOrbLayerNoOrb" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeOrbLayerYesOrb/Area2D" to="Spikes/SpikeOrbLayerYesOrb" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb/Area2D" to="Spikes/SpikeBaseLayerNoOrb" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb/Area2D" to="Spikes/SpikeBaseLayerYesOrb" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb2/Area2D" to="Spikes/SpikeBaseLayerNoOrb2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb2/Area2D" to="Spikes/SpikeBaseLayerYesOrb2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb14/Area2D" to="Spikes/SpikeBaseLayerNoOrb14" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb26/Area2D" to="Spikes/SpikeBaseLayerYesOrb26" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb15/Area2D" to="Spikes/SpikeBaseLayerNoOrb15" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb27/Area2D" to="Spikes/SpikeBaseLayerYesOrb27" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb16/Area2D" to="Spikes/SpikeBaseLayerNoOrb16" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb28/Area2D" to="Spikes/SpikeBaseLayerYesOrb28" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb17/Area2D" to="Spikes/SpikeBaseLayerNoOrb17" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb29/Area2D" to="Spikes/SpikeBaseLayerYesOrb29" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb18/Area2D" to="Spikes/SpikeBaseLayerNoOrb18" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb30/Area2D" to="Spikes/SpikeBaseLayerYesOrb30" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb19/Area2D" to="Spikes/SpikeBaseLayerNoOrb19" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb31/Area2D" to="Spikes/SpikeBaseLayerYesOrb31" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb21/Area2D" to="Spikes/SpikeBaseLayerNoOrb21" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb33/Area2D" to="Spikes/SpikeBaseLayerYesOrb33" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb22/Area2D" to="Spikes/SpikeBaseLayerNoOrb22" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb34/Area2D" to="Spikes/SpikeBaseLayerYesOrb34" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb23/Area2D" to="Spikes/SpikeBaseLayerNoOrb23" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb35/Area2D" to="Spikes/SpikeBaseLayerYesOrb35" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb24/Area2D" to="Spikes/SpikeBaseLayerNoOrb24" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb36/Area2D" to="Spikes/SpikeBaseLayerYesOrb36" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb31/Area2D" to="Spikes/SpikeBaseLayerNoOrb31" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb43/Area2D" to="Spikes/SpikeBaseLayerYesOrb43" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb32/Area2D" to="Spikes/SpikeBaseLayerNoOrb32" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb44/Area2D" to="Spikes/SpikeBaseLayerYesOrb44" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb33/Area2D" to="Spikes/SpikeBaseLayerNoOrb33" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb45/Area2D" to="Spikes/SpikeBaseLayerYesOrb45" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb35/Area2D" to="Spikes/SpikeBaseLayerNoOrb35" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb47/Area2D" to="Spikes/SpikeBaseLayerYesOrb47" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb36/Area2D" to="Spikes/SpikeBaseLayerNoOrb36" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb48/Area2D" to="Spikes/SpikeBaseLayerYesOrb48" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb34/Area2D" to="Spikes/SpikeBaseLayerNoOrb34" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb46/Area2D" to="Spikes/SpikeBaseLayerYesOrb46" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb19/Area2D" to="Spikes/SpikeBaseLayerYesOrb19" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb20/Area2D" to="Spikes/SpikeBaseLayerYesOrb20" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb21/Area2D" to="Spikes/SpikeBaseLayerYesOrb21" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb22/Area2D" to="Spikes/SpikeBaseLayerYesOrb22" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb23/Area2D" to="Spikes/SpikeBaseLayerYesOrb23" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb24/Area2D" to="Spikes/SpikeBaseLayerYesOrb24" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb25/Area2D" to="Spikes/SpikeBaseLayerYesOrb25" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb37/Area2D" to="Spikes/SpikeBaseLayerNoOrb37" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb49/Area2D" to="Spikes/SpikeBaseLayerYesOrb49" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb4/Area2D" to="Spikes/SpikeBaseLayerNoOrb4" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb4/Area2D" to="Spikes/SpikeBaseLayerYesOrb4" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb5/Area2D" to="Spikes/SpikeBaseLayerYesOrb5" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb5/Area2D" to="Spikes/SpikeBaseLayerNoOrb5" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb6/Area2D" to="Spikes/SpikeBaseLayerYesOrb6" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb6/Area2D" to="Spikes/SpikeBaseLayerNoOrb6" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb7/Area2D" to="Spikes/SpikeBaseLayerYesOrb7" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb7/Area2D" to="Spikes/SpikeBaseLayerNoOrb7" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb8/Area2D" to="Spikes/SpikeBaseLayerYesOrb8" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb9/Area2D" to="Spikes/SpikeBaseLayerYesOrb9" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb8/Area2D" to="Spikes/SpikeBaseLayerNoOrb8" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb10/Area2D" to="Spikes/SpikeBaseLayerYesOrb10" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb9/Area2D" to="Spikes/SpikeBaseLayerNoOrb9" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb11/Area2D" to="Spikes/SpikeBaseLayerYesOrb11" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb10/Area2D" to="Spikes/SpikeBaseLayerNoOrb10" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb12/Area2D" to="Spikes/SpikeBaseLayerYesOrb12" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb13/Area2D" to="Spikes/SpikeBaseLayerYesOrb13" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb11/Area2D" to="Spikes/SpikeBaseLayerNoOrb11" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb14/Area2D" to="Spikes/SpikeBaseLayerYesOrb14" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb12/Area2D" to="Spikes/SpikeBaseLayerNoOrb12" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb15/Area2D" to="Spikes/SpikeBaseLayerYesOrb15" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb13/Area2D" to="Spikes/SpikeBaseLayerNoOrb13" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb16/Area2D" to="Spikes/SpikeBaseLayerYesOrb16" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb17/Area2D" to="Spikes/SpikeBaseLayerYesOrb17" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeAllLayer/Area2D" to="Spikes/SpikeAllLayer" method="_on_area_2d_body_entered"]

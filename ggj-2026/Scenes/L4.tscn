@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://d32sllm3ldewv" path="res://Images/Character Spirites/jump.png" id="13_e8a2l"]
 [ext_resource type="Texture2D" uid="uid://c2narx1dm72wg" path="res://Images/Character Spirites/orbjump.png" id="14_dsnxv"]
 [ext_resource type="Texture2D" uid="uid://dppd5c0x3qwbs" path="res://Images/Character Spirites/orbidle.png" id="15_84f1j"]
-[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scenes/fader.gd" id="15_p7nda"]
+[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scripts/fader.gd" id="15_p7nda"]
 [ext_resource type="Texture2D" uid="uid://duutchf0qcace" path="res://Images/Character Spirites/orbpickup.png" id="16_34dh3"]
 [ext_resource type="Texture2D" uid="uid://4tgyocix5aea" path="res://Images/Character Spirites/orbrun.png" id="17_dosht"]
 [ext_resource type="Texture2D" uid="uid://b2qjbtnmaea2o" path="res://Images/Character Spirites/run.png" id="18_hur8f"]
@@ -1169,7 +1169,7 @@ layer = 2
 z_index = 4
 position = Vector2(36, 240)
 script = ExtResource("23_n14i3")
-nextScene = 3
+nextScene = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayerPLayer/TheGoal"]
 z_index = 4

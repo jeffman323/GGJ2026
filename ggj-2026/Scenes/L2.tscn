@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://c51qfuedgay4s" path="res://Images/orb-pickedup.png" id="22_4paif"]
 [ext_resource type="Script" uid="uid://b7n6wq7dw6nd" path="res://Scripts/the_goal.gd" id="23_72a1k"]
 [ext_resource type="Texture2D" uid="uid://b4qacrynm82rt" path="res://Images/goalbig.png" id="24_gs44y"]
-[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scenes/fader.gd" id="24_qt8pk"]
+[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scripts/fader.gd" id="24_qt8pk"]
 [ext_resource type="Texture2D" uid="uid://dcx7sfjnnsd3u" path="res://Images/goaldespawn.png" id="25_yrdqk"]
 [ext_resource type="Texture2D" uid="uid://docnfa582a730" path="res://Images/goalpower.png" id="26_lyf78"]
 [ext_resource type="Texture2D" uid="uid://euahn6kq0e20" path="res://Images/screenwipe.png" id="27_myq8n"]
