@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://ub3xink7jg5m"]
+[gd_scene load_steps=46 format=4 uid="uid://ub3xink7jg5m"]
 
 [ext_resource type="Shader" uid="uid://btlbbuftx7w8b" path="res://ReactToOrb.gdshader" id="1_04tag"]
 [ext_resource type="Texture2D" uid="uid://rapifyuv72vo" path="res://Images/backgroundsv2.png" id="1_oxga5"]
@@ -229,6 +229,47 @@ tracks/2/keys = {
 "values": [8]
 }
 
+[sub_resource type="Animation" id="Animation_p2x12"]
+resource_name = "jump"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_4qc6u")]
+}
+
 [sub_resource type="Animation" id="Animation_1rwvs"]
 resource_name = "orbidle"
 length = 0.8
@@ -270,50 +311,9 @@ tracks/2/keys = {
 "values": [ExtResource("12_vjh8j")]
 }
 
-[sub_resource type="Animation" id="Animation_p2x12"]
-resource_name = "jump"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [13]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("13_4qc6u")]
-}
-
 [sub_resource type="Animation" id="Animation_a8hv7"]
 resource_name = "orbjump"
-length = 1.3
+length = 0.35
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -322,10 +322,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -350,88 +350,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("14_2oxq5")]
-}
-
-[sub_resource type="Animation" id="Animation_i7m21"]
-resource_name = "run"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("15_wylx0")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
-[sub_resource type="Animation" id="Animation_kfjam"]
-resource_name = "orbrun"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("16_376b5")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_q226e"]
@@ -487,11 +405,175 @@ tracks/3/keys = {
 "values": [&"orbidle"]
 }
 
+[sub_resource type="Animation" id="Animation_kfjam"]
+resource_name = "orbrun"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("16_376b5")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_i7m21"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_wylx0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_vjh8j"]
+resource_name = "fall"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.049999982, 0.099999994, 0.14999998, 0.19999999, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_4qc6u")]
+}
+
+[sub_resource type="Animation" id="Animation_4qc6u"]
+resource_name = "orbfall"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("14_2oxq5")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_syxub"]
 _data = {
 &"RESET": SubResource("Animation_yrl3s"),
+&"fall": SubResource("Animation_vjh8j"),
 &"idle": SubResource("Animation_7gr6y"),
 &"jump": SubResource("Animation_p2x12"),
+&"orbfall": SubResource("Animation_4qc6u"),
 &"orbidle": SubResource("Animation_1rwvs"),
 &"orbjump": SubResource("Animation_a8hv7"),
 &"orbpickup": SubResource("Animation_q226e"),
@@ -574,27 +656,27 @@ tile_map_data = PackedByteArray("AAD//woAAgACAAEAAAD//wYAAgACAAEAAAD//wUAAgACAAE
 tile_set = ExtResource("2_oxga5")
 script = ExtResource("3_ce8d2")
 
-[node name="BaseLayer(NoOrb)" type="TileMapLayer" parent="Map"]
+[node name="BaseLayer(YesOrb)" type="TileMapLayer" parent="Map"]
 z_index = -1
 tile_map_data = PackedByteArray("AAAUAA8AAgAAAAMAAAAVAA8AAgABAAMAAAAWAA8AAgABAAMAAAAOABEAAgAGAAMAAAAOABIAAgAGAAEAAAAPABIAAgAHAAUAAAAOABAAAgACAAAAAAAPABEAAgAHAAAAAAAQABIAAgACAAMAAAAXAA8AAgABAAMAAAAYAA8AAgABAAMAAAAZAA8AAgACAAMAAAAcAAwAAgAAAAMAAAAdAAwAAgABAAMAAAAfAAwAAgACAAMAAAAeAAwAAgABAAMAAAA=")
 tile_set = ExtResource("3_04tag")
 
-[node name="BaseLayer(YesOrb)" type="TileMapLayer" parent="Map"]
+[node name="BaseLayer(NoOrb)" type="TileMapLayer" parent="Map"]
 tile_map_data = PackedByteArray("AAAUAA8AAgAAAAMAAAAVAA8AAgABAAMAAAAWAA8AAgABAAMAAAAOABEAAgAGAAMAAAAOABIAAgAGAAEAAAAPABIAAgAHAAUAAAAOABAAAgACAAAAAAAPABEAAgAHAAAAAAAQABIAAgACAAMAAAAXAA8AAgABAAMAAAAYAA8AAgABAAMAAAAZAA8AAgACAAMAAAAcAAwAAgAAAAMAAAAdAAwAAgABAAMAAAAfAAwAAgACAAMAAAAeAAwAAgABAAMAAAA=")
 tile_set = ExtResource("4_ce8d2")
 
-[node name="OrbLayer(NoOrb)" type="TileMapLayer" parent="Map"]
+[node name="OrbLayer(YesOrb)" type="TileMapLayer" parent="Map"]
 z_index = -1
 tile_map_data = PackedByteArray("AAAgABIAAgACAAIAAAAgABEAAgACAAEAAAAgABAAAgACAAEAAAAgAA8AAgADAAEAAAAhAA8AAgABAAMAAAAiAA8AAgABAAMAAAAjAA8AAgABAAMAAAAkAA8AAgACAAMAAAA=")
 tile_set = ExtResource("5_7gr6y")
 
-[node name="OrbLayer(YesOrb)" type="TileMapLayer" parent="Map"]
+[node name="OrbLayer(NoOrb)" type="TileMapLayer" parent="Map"]
 tile_map_data = PackedByteArray("AAAgABIAAgACAAIAAAAgABEAAgACAAEAAAAgABAAAgACAAEAAAAgAA8AAgADAAEAAAAhAA8AAgABAAMAAAAiAA8AAgABAAMAAAAjAA8AAgABAAMAAAAkAA8AAgACAAMAAAA=")
 tile_set = ExtResource("6_yrl3s")
 
 [node name="PlayerCharacter" type="CharacterBody2D" parent="."]
 z_index = 2
-position = Vector2(42, 281)
+position = Vector2(50, 281)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("4_cke1q")
@@ -605,8 +687,9 @@ shape = SubResource("RectangleShape2D_b548h")
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerCharacter"]
 z_index = 2
-texture = ExtResource("11_04tag")
-hframes = 8
+texture = ExtResource("14_2oxq5")
+hframes = 13
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerCharacter/Sprite2D"]
 root_node = NodePath("../..")
