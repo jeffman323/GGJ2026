@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://cbkymid3x05xo"]
+[gd_scene load_steps=76 format=4 uid="uid://tfuk7s3aekj2"]
 
 [ext_resource type="Script" uid="uid://5gp2kfvvoorw" path="res://Scripts/MainScene.gd" id="1_f2rb6"]
 [ext_resource type="Texture2D" uid="uid://rapifyuv72vo" path="res://Images/backgroundsv2.png" id="2_iqsvi"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://d32sllm3ldewv" path="res://Images/Character Spirites/jump.png" id="13_0lh2v"]
 [ext_resource type="Texture2D" uid="uid://c2narx1dm72wg" path="res://Images/Character Spirites/orbjump.png" id="14_qvvyd"]
 [ext_resource type="Texture2D" uid="uid://dppd5c0x3qwbs" path="res://Images/Character Spirites/orbidle.png" id="15_eplxq"]
+[ext_resource type="Script" uid="uid://cpbn4bd0aeql0" path="res://Scenes/fader.gd" id="15_ltkcn"]
 [ext_resource type="Texture2D" uid="uid://duutchf0qcace" path="res://Images/Character Spirites/orbpickup.png" id="16_41nnl"]
 [ext_resource type="Texture2D" uid="uid://4tgyocix5aea" path="res://Images/Character Spirites/orbrun.png" id="17_4q4ps"]
 [ext_resource type="Texture2D" uid="uid://b2qjbtnmaea2o" path="res://Images/Character Spirites/run.png" id="18_5hpaf"]
@@ -28,117 +29,689 @@
 [ext_resource type="Texture2D" uid="uid://docnfa582a730" path="res://Images/goalpower.png" id="26_w6hpm"]
 [ext_resource type="Texture2D" uid="uid://euahn6kq0e20" path="res://Images/screenwipe.png" id="27_iqsvi"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04tag"]
-texture = ExtResource("2_iqsvi")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-4:3/0 = 0
-5:3/0 = 0
-6:3/0 = 0
+[sub_resource type="Animation" id="Animation_hfk56"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
-[sub_resource type="TileSet" id="TileSet_ce8d2"]
-physics_layer_0/collision_layer = 0
-physics_layer_0/collision_mask = 7
-sources/2 = SubResource("TileSetAtlasSource_04tag")
+[sub_resource type="Animation" id="Animation_83csk"]
+resource_name = "screenwipe"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7gr6y"]
-shader = ExtResource("3_ltkcn")
-shader_parameter/cutoff = 1.0
+[sub_resource type="Animation" id="Animation_p7nda"]
+resource_name = "wipespawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_04tag"]
-shader = ExtResource("3_ltkcn")
-shader_parameter/cutoff = 1.0
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ykh2"]
+_data = {
+&"RESET": SubResource("Animation_hfk56"),
+&"screenwipe": SubResource("Animation_83csk"),
+&"wipespawn": SubResource("Animation_p7nda")
+}
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cke1q"]
-texture = ExtResource("2_iqsvi")
-0:0/0 = 0
-0:0/0/material = SubResource("ShaderMaterial_04tag")
-1:0/0 = 0
-1:0/0/material = SubResource("ShaderMaterial_04tag")
-2:0/0 = 0
-2:0/0/material = SubResource("ShaderMaterial_04tag")
-3:0/0 = 0
-3:0/0/material = SubResource("ShaderMaterial_04tag")
-0:1/0 = 0
-0:1/0/material = SubResource("ShaderMaterial_04tag")
-1:1/0 = 0
-1:1/0/material = SubResource("ShaderMaterial_04tag")
-4:0/0 = 0
-4:0/0/material = SubResource("ShaderMaterial_04tag")
-5:0/0 = 0
-5:0/0/material = SubResource("ShaderMaterial_04tag")
-6:0/0 = 0
-6:0/0/material = SubResource("ShaderMaterial_04tag")
-2:1/0 = 0
-2:1/0/material = SubResource("ShaderMaterial_04tag")
-3:1/0 = 0
-3:1/0/material = SubResource("ShaderMaterial_04tag")
-4:1/0 = 0
-4:1/0/material = SubResource("ShaderMaterial_04tag")
-5:1/0 = 0
-5:1/0/material = SubResource("ShaderMaterial_04tag")
-6:1/0 = 0
-6:1/0/material = SubResource("ShaderMaterial_04tag")
-0:2/0 = 0
-0:2/0/material = SubResource("ShaderMaterial_04tag")
-1:2/0 = 0
-1:2/0/material = SubResource("ShaderMaterial_04tag")
-2:2/0 = 0
-2:2/0/material = SubResource("ShaderMaterial_04tag")
-3:2/0 = 0
-3:2/0/material = SubResource("ShaderMaterial_04tag")
-4:2/0 = 0
-4:2/0/material = SubResource("ShaderMaterial_04tag")
-5:2/0 = 0
-5:2/0/material = SubResource("ShaderMaterial_04tag")
-6:2/0 = 0
-6:2/0/material = SubResource("ShaderMaterial_04tag")
-0:3/0 = 0
-0:3/0/material = SubResource("ShaderMaterial_04tag")
-1:3/0 = 0
-1:3/0/material = SubResource("ShaderMaterial_04tag")
-2:3/0 = 0
-2:3/0/material = SubResource("ShaderMaterial_04tag")
-3:3/0 = 0
-3:3/0/material = SubResource("ShaderMaterial_04tag")
-4:3/0 = 0
-4:3/0/material = SubResource("ShaderMaterial_04tag")
-5:3/0 = 0
-5:3/0/material = SubResource("ShaderMaterial_04tag")
-6:3/0 = 0
-6:3/0/material = SubResource("ShaderMaterial_04tag")
+[sub_resource type="Animation" id="Animation_ijri2"]
+resource_name = "GoalBlink1"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_735pn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
-[sub_resource type="TileSet" id="TileSet_qltgq"]
-physics_layer_0/collision_layer = 0
-physics_layer_0/collision_mask = 7
-sources/2 = SubResource("TileSetAtlasSource_cke1q")
+[sub_resource type="Animation" id="Animation_8g603"]
+resource_name = "GoalBlink2"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_735pn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [42, 43, 44, 45, 46, 47, 48, 49, 14]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oxga5"]
-shader = ExtResource("5_g36sp")
-shader_parameter/orb_updater = Vector2(0, 0)
+[sub_resource type="Animation" id="Animation_376b5"]
+resource_name = "GoalSpawn"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_735pn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_4d72h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_gvp4o"]
+resource_name = "goaldespawn"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("25_tp4rx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_v2ycr"]
+resource_name = "goalreached"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("26_w6hpm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.1999999, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8000001, 1.9, 2, 2.1, 2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 6, 7, 8, 6, 7, 8, 6, 7, 8, 6, 7, 8, 6, 7, 8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1rwvs"]
+_data = {
+&"GoalBlink1": SubResource("Animation_ijri2"),
+&"GoalBlink2": SubResource("Animation_8g603"),
+&"GoalSpawn": SubResource("Animation_376b5"),
+&"RESET": SubResource("Animation_4d72h"),
+&"goaldespawn": SubResource("Animation_gvp4o"),
+&"goalreached": SubResource("Animation_v2ycr")
+}
+
+[sub_resource type="Animation" id="Animation_20nku"]
+resource_name = "GoalBlink1"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_735pn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_4t0rq"]
+resource_name = "GoalBlink2"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_735pn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [42, 43, 44, 45, 46, 47, 48, 49, 14]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_i0ro4"]
+resource_name = "GoalSpawn"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("24_735pn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_pvpu8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("25_tp4rx")]
+}
+
+[sub_resource type="Animation" id="Animation_qvuhn"]
+resource_name = "goaldespawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("26_w6hpm"), ExtResource("25_tp4rx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.30000007, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 8, 7, 1, 2, 3, 4, 5, 6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_tkvmn"]
+resource_name = "goalreached"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("26_w6hpm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.1999999, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8000001, 1.9, 2, 2.1, 2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 6, 7, 8, 6, 7, 8, 6, 7, 8, 6, 7, 8, 6, 7, 8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x5s57"]
+_data = {
+&"GoalBlink1": SubResource("Animation_20nku"),
+&"GoalBlink2": SubResource("Animation_4t0rq"),
+&"GoalSpawn": SubResource("Animation_i0ro4"),
+&"RESET": SubResource("Animation_pvpu8"),
+&"goaldespawn": SubResource("Animation_qvuhn"),
+&"goalreached": SubResource("Animation_tkvmn")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b548h"]
 size = Vector2(12, 28)
@@ -563,7 +1136,173 @@ _data = {
 &"run": SubResource("Animation_i7m21")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p4s4s"]
+[sub_resource type="Animation" id="Animation_1m6wk"]
+resource_name = "Fade"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 3.3333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8mn0l"]
+resource_name = "FadeIn"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.5, 3, 4.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5ldm2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8mn0l"]
+_data = {
+&"Fade": SubResource("Animation_1m6wk"),
+&"FadeIn": SubResource("Animation_8mn0l"),
+&"RESET": SubResource("Animation_5ldm2")
+}
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m5lkl"]
+texture = ExtResource("2_iqsvi")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xbus0"]
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 7
+sources/2 = SubResource("TileSetAtlasSource_m5lkl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rxcw7"]
+shader = ExtResource("3_ltkcn")
+shader_parameter/cutoff = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_04tag"]
+shader = ExtResource("3_ltkcn")
+shader_parameter/cutoff = 1.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x74k8"]
+texture = ExtResource("2_iqsvi")
+0:0/0 = 0
+0:0/0/material = SubResource("ShaderMaterial_04tag")
+1:0/0 = 0
+1:0/0/material = SubResource("ShaderMaterial_04tag")
+2:0/0 = 0
+2:0/0/material = SubResource("ShaderMaterial_04tag")
+3:0/0 = 0
+3:0/0/material = SubResource("ShaderMaterial_04tag")
+0:1/0 = 0
+0:1/0/material = SubResource("ShaderMaterial_04tag")
+1:1/0 = 0
+1:1/0/material = SubResource("ShaderMaterial_04tag")
+4:0/0 = 0
+4:0/0/material = SubResource("ShaderMaterial_04tag")
+5:0/0 = 0
+5:0/0/material = SubResource("ShaderMaterial_04tag")
+6:0/0 = 0
+6:0/0/material = SubResource("ShaderMaterial_04tag")
+2:1/0 = 0
+2:1/0/material = SubResource("ShaderMaterial_04tag")
+3:1/0 = 0
+3:1/0/material = SubResource("ShaderMaterial_04tag")
+4:1/0 = 0
+4:1/0/material = SubResource("ShaderMaterial_04tag")
+5:1/0 = 0
+5:1/0/material = SubResource("ShaderMaterial_04tag")
+6:1/0 = 0
+6:1/0/material = SubResource("ShaderMaterial_04tag")
+0:2/0 = 0
+0:2/0/material = SubResource("ShaderMaterial_04tag")
+1:2/0 = 0
+1:2/0/material = SubResource("ShaderMaterial_04tag")
+2:2/0 = 0
+2:2/0/material = SubResource("ShaderMaterial_04tag")
+3:2/0 = 0
+3:2/0/material = SubResource("ShaderMaterial_04tag")
+4:2/0 = 0
+4:2/0/material = SubResource("ShaderMaterial_04tag")
+5:2/0 = 0
+5:2/0/material = SubResource("ShaderMaterial_04tag")
+6:2/0 = 0
+6:2/0/material = SubResource("ShaderMaterial_04tag")
+0:3/0 = 0
+0:3/0/material = SubResource("ShaderMaterial_04tag")
+1:3/0 = 0
+1:3/0/material = SubResource("ShaderMaterial_04tag")
+2:3/0 = 0
+2:3/0/material = SubResource("ShaderMaterial_04tag")
+3:3/0 = 0
+3:3/0/material = SubResource("ShaderMaterial_04tag")
+4:3/0 = 0
+4:3/0/material = SubResource("ShaderMaterial_04tag")
+5:3/0 = 0
+5:3/0/material = SubResource("ShaderMaterial_04tag")
+6:3/0 = 0
+6:3/0/material = SubResource("ShaderMaterial_04tag")
+
+[sub_resource type="TileSet" id="TileSet_o52qt"]
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 7
+sources/2 = SubResource("TileSetAtlasSource_x74k8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uryd5"]
+shader = ExtResource("5_g36sp")
+shader_parameter/orb_updater = Vector2(0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bltrt"]
 radius = 6.5
 
 [sub_resource type="Animation" id="Animation_04tag"]
@@ -712,376 +1451,96 @@ _data = {
 &"RESET": SubResource("Animation_ce8d2")
 }
 
-[sub_resource type="Animation" id="Animation_ijri2"]
-resource_name = "GoalBlink1"
-length = 1.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("24_735pn")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:vframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
-[sub_resource type="Animation" id="Animation_8g603"]
-resource_name = "GoalBlink2"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("24_735pn")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [42, 43, 44, 45, 46, 47, 48, 49, 14]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:vframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
-[sub_resource type="Animation" id="Animation_376b5"]
-resource_name = "GoalSpawn"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("24_735pn")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:vframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
-[sub_resource type="Animation" id="Animation_4d72h"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [12]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_gvp4o"]
-resource_name = "goaldespawn"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("25_tp4rx")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:vframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_v2ycr"]
-resource_name = "goalreached"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("26_w6hpm")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [9]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:vframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1rwvs"]
-_data = {
-&"GoalBlink1": SubResource("Animation_ijri2"),
-&"GoalBlink2": SubResource("Animation_8g603"),
-&"GoalSpawn": SubResource("Animation_376b5"),
-&"RESET": SubResource("Animation_4d72h"),
-&"goaldespawn": SubResource("Animation_gvp4o"),
-&"goalreached": SubResource("Animation_v2ycr")
-}
-
-[sub_resource type="Animation" id="Animation_p7nda"]
-resource_name = "wipespawn"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-
-[sub_resource type="Animation" id="Animation_hfk56"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_83csk"]
-resource_name = "screenwipe"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 11, 12, 13, 14, 15]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ykh2"]
-_data = {
-&"RESET": SubResource("Animation_hfk56"),
-&"screenwipe": SubResource("Animation_83csk"),
-&"wipespawn": SubResource("Animation_p7nda")
-}
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_f2rb6")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(1, 0)
 anchor_mode = 0
+
+[node name="Level Transition" type="Node2D" parent="."]
+position = Vector2(-79, 136)
+
+[node name="Sprite2D" type="Sprite2D" parent="Level Transition"]
+texture = ExtResource("27_iqsvi")
+hframes = 8
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level Transition/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_0ykh2")
+}
+
+[node name="CanvasLayerPLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TheGoal" type="Node2D" parent="CanvasLayerPLayer"]
+z_index = 4
+position = Vector2(350, 65)
+script = ExtResource("23_n7ar3")
+nextScene = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayerPLayer/TheGoal"]
+z_index = 4
+texture = ExtResource("26_w6hpm")
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayerPLayer/TheGoal/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_1rwvs")
+}
+
+[node name="FakeGoalSprite" type="Sprite2D" parent="CanvasLayerPLayer/TheGoal"]
+z_index = 4
+position = Vector2(-243, 48)
+texture = ExtResource("25_tp4rx")
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayerPLayer/TheGoal/FakeGoalSprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_x5s57")
+}
+
+[node name="PlayerCharacter" type="CharacterBody2D" parent="CanvasLayerPLayer"]
+z_index = 2
+position = Vector2(118, 129)
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("11_m4yg3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayerPLayer/PlayerCharacter"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_b548h")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayerPLayer/PlayerCharacter"]
+z_index = 2
+texture = ExtResource("12_7f37b")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayerPLayer/PlayerCharacter/Sprite2D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_syxub")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("15_ltkcn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_8mn0l")
+}
+
+[node name="Spikes" type="Node2D" parent="."]
 
 [node name="Map" type="Node2D" parent="."]
 position = Vector2(16, 16)
@@ -1091,21 +1550,21 @@ z_index = -1
 use_parent_material = true
 position = Vector2(16, 16)
 tile_map_data = PackedByteArray("AAAAAAAAAgAAAAIAAAABAAAAAgAAAAIAAAACAAAAAgAAAAIAAAADAAAAAgAAAAIAAAAEAAAAAgAAAAIAAAAFAAAAAgAAAAIAAAAGAAAAAgAAAAIAAAAHAAAAAgAAAAIAAAAIAAAAAgAAAAIAAAAJAAAAAgAAAAIAAAAKAAAAAgAAAAIAAAALAAAAAgAAAAIAAAAMAAAAAgAAAAIAAAANAAAAAgAAAAIAAAAOAAAAAgAAAAIAAAAPAAAAAgAAAAIAAAAQAAAAAgAAAAIAAAARAAAAAgAAAAIAAAASAAAAAgAAAAIAAAATAAAAAgAAAAIAAAATAAEAAgAAAAIAAAATAAIAAgAAAAIAAAATAAMAAgAAAAIAAAATAAQAAgAAAAIAAAATAAUAAgAAAAIAAAATAAYAAgAAAAIAAAATAAcAAgAAAAIAAAATAAgAAgAAAAIAAAATAAkAAgAAAAIAAAAAAAgAAgAAAAIAAAAAAAcAAgAAAAIAAAAAAAYAAgAAAAIAAAAAAAUAAgAAAAIAAAAAAAQAAgAAAAIAAAAAAAMAAgAAAAIAAAAAAAIAAgAAAAIAAAAAAAEAAgAAAAIAAAABAAEAAgAAAAIAAAACAAEAAgAAAAIAAAADAAEAAgAAAAIAAAAEAAEAAgAAAAIAAAAFAAEAAgAAAAIAAAAGAAEAAgAAAAIAAAAHAAEAAgAAAAIAAAAIAAEAAgAAAAIAAAAJAAEAAgAAAAIAAAAKAAEAAgAAAAIAAAALAAEAAgAAAAIAAAAMAAEAAgAAAAIAAAANAAEAAgAAAAIAAAAOAAEAAgAAAAIAAAAPAAEAAgAAAAIAAAAQAAEAAgAAAAIAAAARAAEAAgAAAAIAAAASAAEAAgAAAAIAAAASAAIAAgAAAAIAAAASAAMAAgAAAAIAAAASAAQAAgAAAAIAAAASAAUAAgAAAAIAAAASAAYAAgAAAAIAAAASAAcAAgAAAAIAAAASAAgAAgAAAAIAAAARAAgAAgAAAAIAAAAQAAgAAgAAAAIAAAAPAAgAAgAAAAIAAAAOAAgAAgAAAAIAAAANAAgAAgAAAAIAAAAMAAgAAgAAAAIAAAALAAgAAgAAAAIAAAAKAAgAAgAAAAIAAAAJAAgAAgAAAAIAAAAIAAgAAgAAAAIAAAAHAAgAAgAAAAIAAAAGAAgAAgAAAAIAAAAFAAgAAgAAAAIAAAAEAAgAAgAAAAIAAAADAAgAAgAAAAIAAAACAAgAAgAAAAIAAAABAAgAAgAAAAIAAAABAAYAAgAAAAIAAAABAAcAAgAAAAIAAAACAAcAAgAAAAIAAAAGAAcAAgAAAAIAAAAHAAcAAgAAAAIAAAAIAAcAAgAAAAIAAAAJAAcAAgAAAAIAAAAKAAcAAgAAAAIAAAALAAcAAgAAAAIAAAAMAAcAAgAAAAIAAAAMAAYAAgAAAAIAAAANAAYAAgAAAAIAAAAOAAYAAgAAAAIAAAAPAAYAAgAAAAIAAAAQAAYAAgAAAAIAAAAQAAcAAgAAAAIAAAARAAcAAgAAAAIAAAAPAAcAAgAAAAIAAAAOAAcAAgAAAAIAAAANAAcAAgAAAAIAAAAFAAcAAgAAAAIAAAAEAAcAAgAAAAIAAAADAAcAAgAAAAIAAAABAAUAAgAAAAIAAAACAAUAAgAAAAIAAAADAAUAAgAAAAIAAAADAAYAAgAAAAIAAAAEAAYAAgAAAAIAAAAFAAYAAgAAAAIAAAAGAAYAAgAAAAIAAAAHAAYAAgAAAAIAAAAIAAYAAgAAAAIAAAAJAAUAAgAAAAIAAAAKAAUAAgAAAAIAAAAJAAYAAgAAAAIAAAACAAYAAgAAAAIAAAAKAAYAAgAAAAIAAAALAAYAAgAAAAIAAAAPAAUAAgAAAAIAAAAQAAUAAgAAAAIAAAARAAUAAgAAAAIAAAARAAYAAgAAAAIAAAARAAQAAgAAAAIAAAARAAMAAgAAAAIAAAARAAIAAgAAAAIAAAAQAAMAAgAAAAIAAAAQAAQAAgAAAAIAAAAQAAIAAgAAAAIAAAAPAAIAAgAAAAIAAAAPAAMAAgAAAAIAAAAPAAQAAgAAAAIAAAAOAAQAAgAAAAIAAAAOAAUAAgAAAAIAAAAOAAMAAgAAAAIAAAAOAAIAAgAAAAIAAAANAAIAAgAAAAIAAAANAAMAAgAAAAIAAAANAAQAAgAAAAIAAAANAAUAAgAAAAIAAAAMAAMAAgAAAAIAAAAMAAQAAgAAAAIAAAAMAAUAAgAAAAIAAAAMAAIAAgAAAAIAAAALAAQAAgAAAAIAAAALAAUAAgAAAAIAAAALAAMAAgAAAAIAAAALAAIAAgAAAAIAAAAKAAQAAgAAAAIAAAAKAAMAAgAAAAIAAAAKAAIAAgAAAAIAAAAJAAIAAgAAAAIAAAAIAAMAAgAAAAIAAAAIAAQAAgAAAAIAAAAIAAUAAgAAAAIAAAAHAAUAAgAAAAIAAAAIAAIAAgAAAAIAAAAJAAQAAgAAAAIAAAAJAAMAAgAAAAIAAAAHAAIAAgAAAAIAAAAHAAMAAgAAAAIAAAAHAAQAAgAAAAIAAAAGAAMAAgAAAAIAAAAGAAQAAgAAAAIAAAAGAAUAAgAAAAIAAAAGAAIAAgAAAAIAAAAFAAMAAgAAAAIAAAAFAAQAAgAAAAIAAAAFAAUAAgAAAAIAAAAFAAIAAgAAAAIAAAAEAAQAAgAAAAIAAAAEAAUAAgAAAAIAAAAEAAMAAgAAAAIAAAAEAAIAAgAAAAIAAAADAAIAAgAAAAIAAAADAAMAAgAAAAIAAAADAAQAAgAAAAIAAAACAAQAAgAAAAIAAAACAAMAAgAAAAIAAAACAAIAAgAAAAIAAAABAAIAAgAAAAIAAAABAAMAAgAAAAIAAAABAAQAAgAAAAIAAAAAAAkAAgAAAAIAAAABAAkAAgAAAAIAAAACAAkAAgAAAAIAAAADAAkAAgAAAAIAAAAEAAkAAgAAAAIAAAAFAAkAAgAAAAIAAAAGAAkAAgAAAAIAAAAHAAkAAgAAAAIAAAAIAAkAAgAAAAIAAAAJAAkAAgAAAAIAAAAKAAkAAgAAAAIAAAALAAkAAgAAAAIAAAAMAAkAAgAAAAIAAAANAAkAAgAAAAIAAAAOAAkAAgAAAAIAAAAPAAkAAgAAAAIAAAAQAAkAAgAAAAIAAAARAAkAAgAAAAIAAAASAAkAAgAAAAIAAAAAAAoAAgAAAAIAAAABAAoAAgAAAAIAAAACAAoAAgAAAAIAAAADAAoAAgAAAAIAAAAEAAoAAgAAAAIAAAAFAAoAAgAAAAIAAAAGAAoAAgAAAAIAAAAHAAoAAgAAAAIAAAAIAAoAAgAAAAIAAAAJAAoAAgAAAAIAAAAKAAoAAgAAAAIAAAALAAoAAgAAAAIAAAAMAAoAAgAAAAIAAAANAAoAAgAAAAIAAAAOAAoAAgAAAAIAAAAPAAoAAgAAAAIAAAAQAAoAAgAAAAIAAAARAAoAAgAAAAIAAAASAAoAAgAAAAIAAAATAAoAAgAAAAIAAAAUAAsAAgAAAAIAAAATAAsAAgAAAAIAAAATAAwAAgAAAAIAAAASAAwAAgAAAAIAAAASAA0AAgAAAAIAAAARAA0AAgAAAAIAAAASAAsAAgAAAAIAAAARAAsAAgAAAAIAAAAQAAsAAgAAAAIAAAAPAAsAAgAAAAIAAAAOAAsAAgAAAAIAAAANAAwAAgAAAAIAAAANAA0AAgAAAAIAAAANAA4AAgAAAAIAAAAOAA4AAgAAAAIAAAAPAA4AAgAAAAIAAAAQAA4AAgAAAAIAAAATAA0AAgAAAAIAAAAUAAwAAgAAAAIAAAAVAAwAAgAAAAIAAAAVAAsAAgAAAAIAAAAOAAwAAgAAAAIAAAAMAAwAAgAAAAIAAAAMAA0AAgAAAAIAAAAMAA4AAgAAAAIAAAARAAwAAgAAAAIAAAAQAA0AAgAAAAIAAAAPAA0AAgAAAAIAAAAQAAwAAgAAAAIAAAAPAAwAAgAAAAIAAAAOAA0AAgAAAAIAAAALAA4AAgAAAAIAAAARAA4AAgAAAAIAAAANAAsAAgAAAAIAAAASAA4AAgAAAAIAAAATAA4AAgAAAAIAAAAUAAAAAgAAAAIAAAAUAAEAAgAAAAIAAAAUAAIAAgAAAAIAAAAUAAMAAgAAAAIAAAAUAAQAAgAAAAIAAAAUAAUAAgAAAAIAAAAUAAYAAgAAAAIAAAAUAAcAAgAAAAIAAAAUAAgAAgAAAAIAAAAUAAkAAgAAAAIAAAAUAAoAAgAAAAIAAAAUAA0AAgAAAAIAAAAUAA4AAgAAAAIAAAAVAAAAAgAAAAIAAAAVAAEAAgAAAAIAAAAVAAIAAgAAAAIAAAAVAAMAAgAAAAIAAAAVAAQAAgAAAAIAAAAVAAUAAgAAAAIAAAAVAAYAAgAAAAIAAAAVAAcAAgAAAAIAAAAVAAgAAgAAAAIAAAAVAAkAAgAAAAIAAAAVAAoAAgAAAAIAAAAVAA0AAgAAAAIAAAAVAA4AAgAAAAIAAAAWAAAAAgAAAAIAAAAWAAEAAgAAAAIAAAAWAAIAAgAAAAIAAAAWAAMAAgAAAAIAAAAWAAQAAgAAAAIAAAAWAAUAAgAAAAIAAAAWAAYAAgAAAAIAAAAWAAcAAgAAAAIAAAAWAAgAAgAAAAIAAAAWAAkAAgAAAAIAAAAWAAoAAgAAAAIAAAAWAAsAAgAAAAIAAAAWAAwAAgAAAAIAAAAWAA0AAgAAAAIAAAAWAA4AAgAAAAIAAAAXAAAAAgAAAAIAAAAXAAEAAgAAAAIAAAAXAAIAAgAAAAIAAAAXAAMAAgAAAAIAAAAXAAQAAgAAAAIAAAAXAAUAAgAAAAIAAAAXAAYAAgAAAAIAAAAXAAcAAgAAAAIAAAAXAAgAAgAAAAIAAAAXAAkAAgAAAAIAAAAXAAoAAgAAAAIAAAAXAAsAAgAAAAIAAAAXAAwAAgAAAAIAAAAXAA0AAgAAAAIAAAAXAA4AAgAAAAIAAAAYAAAAAgAAAAIAAAAYAAEAAgAAAAIAAAAYAAIAAgAAAAIAAAAYAAMAAgAAAAIAAAAYAAQAAgAAAAIAAAAYAAUAAgAAAAIAAAAYAAYAAgAAAAIAAAAYAAcAAgAAAAIAAAAYAAgAAgAAAAIAAAAYAAkAAgAAAAIAAAAYAAoAAgAAAAIAAAAYAAsAAgAAAAIAAAAYAAwAAgAAAAIAAAAYAA0AAgAAAAIAAAAYAA4AAgAAAAIAAAAZAAAAAgAAAAIAAAAZAAEAAgAAAAIAAAAZAAIAAgAAAAIAAAAZAAMAAgAAAAIAAAAZAAQAAgAAAAIAAAAZAAUAAgAAAAIAAAAZAAYAAgAAAAIAAAAZAAcAAgAAAAIAAAAZAAgAAgAAAAIAAAAZAAkAAgAAAAIAAAAZAAoAAgAAAAIAAAAZAAsAAgAAAAIAAAAZAAwAAgAAAAIAAAAZAA0AAgAAAAIAAAAZAA4AAgAAAAIAAAAaAAAAAgAAAAIAAAAaAAEAAgAAAAIAAAAaAAIAAgAAAAIAAAAaAAMAAgAAAAIAAAAaAAQAAgAAAAIAAAAaAAUAAgAAAAIAAAAaAAYAAgAAAAIAAAAaAAcAAgAAAAIAAAAaAAgAAgAAAAIAAAAaAAkAAgAAAAIAAAAaAAoAAgAAAAIAAAAaAAsAAgAAAAIAAAAaAAwAAgAAAAIAAAAaAA0AAgAAAAIAAAAaAA4AAgAAAAIAAAAbAAAAAgAAAAIAAAAbAAEAAgAAAAIAAAAbAAIAAgAAAAIAAAAbAAMAAgAAAAIAAAAbAAQAAgAAAAIAAAAbAAUAAgAAAAIAAAAbAAYAAgAAAAIAAAAbAAcAAgAAAAIAAAAbAAgAAgAAAAIAAAAbAAkAAgAAAAIAAAAbAAoAAgAAAAIAAAAbAAsAAgAAAAIAAAAbAAwAAgAAAAIAAAAbAA0AAgAAAAIAAAAbAA4AAgAAAAIAAAAcAAAAAgAAAAIAAAAcAAEAAgAAAAIAAAAcAAIAAgAAAAIAAAAcAAMAAgAAAAIAAAAcAAQAAgAAAAIAAAAcAAUAAgAAAAIAAAAcAAYAAgAAAAIAAAAcAAcAAgAAAAIAAAAcAAgAAgAAAAIAAAAcAAkAAgAAAAIAAAAcAAoAAgAAAAIAAAAcAAsAAgAAAAIAAAAcAAwAAgAAAAIAAAAcAA0AAgAAAAIAAAAcAA4AAgAAAAIAAAABAAsAAgAAAAIAAAABAAwAAgAAAAIAAAABAA0AAgAAAAIAAAABAA4AAgAAAAIAAAACAAsAAgAAAAIAAAACAAwAAgAAAAIAAAACAA0AAgAAAAIAAAACAA4AAgAAAAIAAAADAAsAAgAAAAIAAAADAAwAAgAAAAIAAAADAA0AAgAAAAIAAAADAA4AAgAAAAIAAAAEAAsAAgAAAAIAAAAEAAwAAgAAAAIAAAAEAA0AAgAAAAIAAAAEAA4AAgAAAAIAAAAFAAsAAgAAAAIAAAAFAAwAAgAAAAIAAAAFAA0AAgAAAAIAAAAFAA4AAgAAAAIAAAAGAAsAAgAAAAIAAAAGAAwAAgAAAAIAAAAGAA0AAgAAAAIAAAAGAA4AAgAAAAIAAAAHAAsAAgAAAAIAAAAHAAwAAgAAAAIAAAAHAA0AAgAAAAIAAAAHAA4AAgAAAAIAAAAIAAsAAgAAAAIAAAAIAAwAAgAAAAIAAAAIAA0AAgAAAAIAAAAIAA4AAgAAAAIAAAAJAAsAAgAAAAIAAAAJAAwAAgAAAAIAAAAJAA0AAgAAAAIAAAAJAA4AAgAAAAIAAAAKAAsAAgAAAAIAAAAKAAwAAgAAAAIAAAAKAA0AAgAAAAIAAAAKAA4AAgAAAAIAAAALAAsAAgAAAAIAAAALAAwAAgAAAAIAAAALAA0AAgAAAAIAAAAMAAsAAgAAAAIAAAAAAAsAAgAAAAIAAAAAAAwAAgAAAAIAAAAAAA0AAgAAAAIAAAAAAA4AAgAAAAIAAAD/////AgAAAAIAAAD//wAAAgAAAAIAAAD//wEAAgAAAAIAAAD//wIAAgAAAAIAAAD//wMAAgAAAAIAAAD//wQAAgAAAAIAAAD//wUAAgAAAAIAAAD//wYAAgAAAAIAAAD//wcAAgAAAAIAAAD//wgAAgAAAAIAAAD//wkAAgAAAAIAAAD//woAAgAAAAIAAAD//wsAAgAAAAIAAAD//wwAAgAAAAIAAAD//w0AAgAAAAIAAAD//w4AAgAAAAIAAAAAAP//AgAAAAIAAAABAP//AgAAAAIAAAACAP//AgAAAAIAAAADAP//AgAAAAIAAAAEAP//AgAAAAIAAAAFAP//AgAAAAIAAAAGAP//AgAAAAIAAAAHAP//AgAAAAIAAAAIAP//AgAAAAIAAAAJAP//AgAAAAIAAAAKAP//AgAAAAIAAAALAP//AgAAAAIAAAAMAP//AgAAAAIAAAANAP//AgAAAAIAAAAOAP//AgAAAAIAAAAPAP//AgAAAAIAAAAQAP//AgAAAAIAAAARAP//AgAAAAIAAAASAP//AgAAAAIAAAATAP//AgAAAAIAAAAUAP//AgAAAAIAAAAVAP//AgAAAAIAAAAWAP//AgAAAAIAAAAXAP//AgAAAAIAAAAYAP//AgAAAAIAAAAZAP//AgAAAAIAAAAaAP//AgAAAAIAAAAbAP//AgAAAAIAAAAcAP//AgAAAAIAAAA=")
-tile_set = SubResource("TileSet_ce8d2")
+tile_set = SubResource("TileSet_xbus0")
 collision_enabled = false
 
 [node name="Background(NoOrb)" type="TileMapLayer" parent="Map"]
-material = SubResource("ShaderMaterial_7gr6y")
+material = SubResource("ShaderMaterial_rxcw7")
 use_parent_material = true
 position = Vector2(16, 16)
 tile_map_data = PackedByteArray("AAAAAAAAAgAAAAEAAAABAAAAAgAAAAEAAAACAAAAAgAAAAEAAAADAAAAAgAAAAEAAAAEAAAAAgAAAAEAAAAFAAAAAgAAAAEAAAAGAAAAAgAAAAEAAAAHAAAAAgAAAAEAAAAIAAAAAgAAAAEAAAAJAAAAAgAAAAEAAAAKAAAAAgAAAAEAAAALAAAAAgAAAAEAAAAMAAAAAgAAAAEAAAANAAAAAgAAAAEAAAAOAAAAAgAAAAEAAAAPAAAAAgAAAAEAAAAQAAAAAgAAAAEAAAARAAAAAgAAAAEAAAASAAAAAgAAAAEAAAATAAAAAgAAAAEAAAATAAEAAgAAAAEAAAATAAIAAgAAAAEAAAATAAMAAgAAAAEAAAATAAQAAgAAAAEAAAATAAUAAgAAAAEAAAATAAYAAgAAAAEAAAATAAcAAgAAAAEAAAATAAgAAgAAAAEAAAATAAkAAgAAAAEAAAAAAAgAAgAAAAEAAAAAAAcAAgAAAAEAAAAAAAYAAgAAAAEAAAAAAAUAAgAAAAEAAAAAAAQAAgAAAAEAAAAAAAMAAgAAAAEAAAAAAAIAAgAAAAEAAAAAAAEAAgAAAAEAAAABAAEAAgAAAAEAAAACAAEAAgAAAAEAAAADAAEAAgAAAAEAAAAEAAEAAgAAAAEAAAAFAAEAAgAAAAEAAAAGAAEAAgAAAAEAAAAHAAEAAgAAAAEAAAAIAAEAAgAAAAEAAAAJAAEAAgAAAAEAAAAKAAEAAgAAAAEAAAALAAEAAgAAAAEAAAAMAAEAAgAAAAEAAAANAAEAAgAAAAEAAAAOAAEAAgAAAAEAAAAPAAEAAgAAAAEAAAAQAAEAAgAAAAEAAAARAAEAAgAAAAEAAAASAAEAAgAAAAEAAAASAAIAAgAAAAEAAAASAAMAAgAAAAEAAAASAAQAAgAAAAEAAAASAAUAAgAAAAEAAAASAAYAAgAAAAEAAAASAAcAAgAAAAEAAAASAAgAAgAAAAEAAAARAAgAAgAAAAEAAAAQAAgAAgAAAAEAAAAPAAgAAgAAAAEAAAAOAAgAAgAAAAEAAAANAAgAAgAAAAEAAAAMAAgAAgAAAAEAAAALAAgAAgAAAAEAAAAKAAgAAgAAAAEAAAAJAAgAAgAAAAEAAAAIAAgAAgAAAAEAAAAHAAgAAgAAAAEAAAAGAAgAAgAAAAEAAAAFAAgAAgAAAAEAAAAEAAgAAgAAAAEAAAADAAgAAgAAAAEAAAACAAgAAgAAAAEAAAABAAgAAgAAAAEAAAABAAYAAgAAAAEAAAABAAcAAgAAAAEAAAACAAcAAgAAAAEAAAAGAAcAAgAAAAEAAAAHAAcAAgAAAAEAAAAIAAcAAgAAAAEAAAAJAAcAAgAAAAEAAAAKAAcAAgAAAAEAAAALAAcAAgAAAAEAAAAMAAcAAgAAAAEAAAAMAAYAAgAAAAEAAAANAAYAAgAAAAEAAAAOAAYAAgAAAAEAAAAPAAYAAgAAAAEAAAAQAAYAAgAAAAEAAAAQAAcAAgAAAAEAAAARAAcAAgAAAAEAAAAPAAcAAgAAAAEAAAAOAAcAAgAAAAEAAAANAAcAAgAAAAEAAAAFAAcAAgAAAAEAAAAEAAcAAgAAAAEAAAADAAcAAgAAAAEAAAABAAUAAgAAAAEAAAACAAUAAgAAAAEAAAADAAUAAgAAAAEAAAADAAYAAgAAAAEAAAAEAAYAAgAAAAEAAAAFAAYAAgAAAAEAAAAGAAYAAgAAAAEAAAAHAAYAAgAAAAEAAAAIAAYAAgAAAAEAAAAJAAUAAgAAAAEAAAAKAAUAAgAAAAEAAAAJAAYAAgAAAAEAAAACAAYAAgAAAAEAAAAKAAYAAgAAAAEAAAALAAYAAgAAAAEAAAAPAAUAAgAAAAEAAAAQAAUAAgAAAAEAAAARAAUAAgAAAAEAAAARAAYAAgAAAAEAAAARAAQAAgAAAAEAAAARAAMAAgAAAAEAAAARAAIAAgAAAAEAAAAQAAMAAgAAAAEAAAAQAAQAAgAAAAEAAAAQAAIAAgAAAAEAAAAPAAIAAgAAAAEAAAAPAAMAAgAAAAEAAAAPAAQAAgAAAAEAAAAOAAQAAgAAAAEAAAAOAAUAAgAAAAEAAAAOAAMAAgAAAAEAAAAOAAIAAgAAAAEAAAANAAIAAgAAAAEAAAANAAMAAgAAAAEAAAANAAQAAgAAAAEAAAANAAUAAgAAAAEAAAAMAAMAAgAAAAEAAAAMAAQAAgAAAAEAAAAMAAUAAgAAAAEAAAAMAAIAAgAAAAEAAAALAAQAAgAAAAEAAAALAAUAAgAAAAEAAAALAAMAAgAAAAEAAAALAAIAAgAAAAEAAAAKAAQAAgAAAAEAAAAKAAMAAgAAAAEAAAAKAAIAAgAAAAEAAAAJAAIAAgAAAAEAAAAIAAMAAgAAAAEAAAAIAAQAAgAAAAEAAAAIAAUAAgAAAAEAAAAHAAUAAgAAAAEAAAAIAAIAAgAAAAEAAAAJAAQAAgAAAAEAAAAJAAMAAgAAAAEAAAAHAAIAAgAAAAEAAAAHAAMAAgAAAAEAAAAHAAQAAgAAAAEAAAAGAAMAAgAAAAEAAAAGAAQAAgAAAAEAAAAGAAUAAgAAAAEAAAAGAAIAAgAAAAEAAAAFAAMAAgAAAAEAAAAFAAQAAgAAAAEAAAAFAAUAAgAAAAEAAAAFAAIAAgAAAAEAAAAEAAQAAgAAAAEAAAAEAAUAAgAAAAEAAAAEAAMAAgAAAAEAAAAEAAIAAgAAAAEAAAADAAIAAgAAAAEAAAADAAMAAgAAAAEAAAADAAQAAgAAAAEAAAACAAQAAgAAAAEAAAACAAMAAgAAAAEAAAACAAIAAgAAAAEAAAABAAIAAgAAAAEAAAABAAMAAgAAAAEAAAABAAQAAgAAAAEAAAAAAAkAAgAAAAEAAAABAAkAAgAAAAEAAAACAAkAAgAAAAEAAAADAAkAAgAAAAEAAAAEAAkAAgAAAAEAAAAFAAkAAgAAAAEAAAAGAAkAAgAAAAEAAAAHAAkAAgAAAAEAAAAIAAkAAgAAAAEAAAAJAAkAAgAAAAEAAAAKAAkAAgAAAAEAAAALAAkAAgAAAAEAAAAMAAkAAgAAAAEAAAANAAkAAgAAAAEAAAAOAAkAAgAAAAEAAAAPAAkAAgAAAAEAAAAQAAkAAgAAAAEAAAARAAkAAgAAAAEAAAASAAkAAgAAAAEAAAAAAAoAAgAAAAEAAAACAAoAAgAAAAEAAAADAAoAAgAAAAEAAAAEAAoAAgAAAAEAAAAFAAoAAgAAAAEAAAAGAAoAAgAAAAEAAAAHAAoAAgAAAAEAAAAIAAoAAgAAAAEAAAAJAAoAAgAAAAEAAAAKAAoAAgAAAAEAAAALAAoAAgAAAAEAAAAMAAoAAgAAAAEAAAANAAoAAgAAAAEAAAAOAAoAAgAAAAEAAAAPAAoAAgAAAAEAAAAQAAoAAgAAAAEAAAARAAoAAgAAAAEAAAASAAoAAgAAAAEAAAATAAoAAgAAAAEAAAAUAAsAAgAAAAEAAAATAAsAAgAAAAEAAAATAAwAAgAAAAEAAAASAAwAAgAAAAEAAAASAA0AAgAAAAEAAAARAA0AAgAAAAEAAAASAAsAAgAAAAEAAAARAAsAAgAAAAEAAAAQAAsAAgAAAAEAAAAPAAsAAgAAAAEAAAAOAAsAAgAAAAEAAAANAAwAAgAAAAEAAAANAA0AAgAAAAEAAAANAA4AAgAAAAEAAAAOAA4AAgAAAAEAAAAPAA4AAgAAAAEAAAAQAA4AAgAAAAEAAAATAA0AAgAAAAEAAAAUAAwAAgAAAAEAAAAVAAwAAgAAAAEAAAAVAAsAAgAAAAEAAAAOAAwAAgAAAAEAAAAMAAwAAgAAAAEAAAAMAA0AAgAAAAEAAAAMAA4AAgAAAAEAAAARAAwAAgAAAAEAAAAQAA0AAgAAAAEAAAAPAA0AAgAAAAEAAAAQAAwAAgAAAAEAAAAPAAwAAgAAAAEAAAAOAA0AAgAAAAEAAAALAA4AAgAAAAEAAAARAA4AAgAAAAEAAAANAAsAAgAAAAEAAAASAA4AAgAAAAEAAAATAA4AAgAAAAEAAAAUAAAAAgAAAAEAAAAUAAEAAgAAAAEAAAAUAAIAAgAAAAEAAAAUAAMAAgAAAAEAAAAUAAQAAgAAAAEAAAAUAAUAAgAAAAEAAAAUAAYAAgAAAAEAAAAUAAcAAgAAAAEAAAAUAAgAAgAAAAEAAAAUAAkAAgAAAAEAAAAUAAoAAgAAAAEAAAAUAA0AAgAAAAEAAAAUAA4AAgAAAAEAAAAVAAAAAgAAAAEAAAAVAAEAAgAAAAEAAAAVAAIAAgAAAAEAAAAVAAMAAgAAAAEAAAAVAAQAAgAAAAEAAAAVAAUAAgAAAAEAAAAVAAYAAgAAAAEAAAAVAAcAAgAAAAEAAAAVAAgAAgAAAAEAAAAVAAkAAgAAAAEAAAAVAAoAAgAAAAEAAAAVAA0AAgAAAAEAAAAVAA4AAgAAAAEAAAAWAAAAAgAAAAEAAAAWAAEAAgAAAAEAAAAWAAIAAgAAAAEAAAAWAAMAAgAAAAEAAAAWAAQAAgAAAAEAAAAWAAUAAgAAAAEAAAAWAAYAAgAAAAEAAAAWAAcAAgAAAAEAAAAWAAgAAgAAAAEAAAAWAAkAAgAAAAEAAAAWAAoAAgAAAAEAAAAWAAsAAgAAAAEAAAAWAAwAAgAAAAEAAAAWAA0AAgAAAAEAAAAWAA4AAgAAAAEAAAAXAAAAAgAAAAEAAAAXAAEAAgAAAAEAAAAXAAIAAgAAAAEAAAAXAAMAAgAAAAEAAAAXAAQAAgAAAAEAAAAXAAUAAgAAAAEAAAAXAAYAAgAAAAEAAAAXAAcAAgAAAAEAAAAXAAgAAgAAAAEAAAAXAAkAAgAAAAEAAAAXAAoAAgAAAAEAAAAXAAsAAgAAAAEAAAAXAAwAAgAAAAEAAAAXAA0AAgAAAAEAAAAXAA4AAgAAAAEAAAAYAAAAAgAAAAEAAAAYAAEAAgAAAAEAAAAYAAIAAgAAAAEAAAAYAAMAAgAAAAEAAAAYAAQAAgAAAAEAAAAYAAUAAgAAAAEAAAAYAAYAAgAAAAEAAAAYAAcAAgAAAAEAAAAYAAgAAgAAAAEAAAAYAAkAAgAAAAEAAAAYAAoAAgAAAAEAAAAYAAsAAgAAAAEAAAAYAAwAAgAAAAEAAAAYAA0AAgAAAAEAAAAYAA4AAgAAAAEAAAAZAAAAAgAAAAEAAAAZAAEAAgAAAAEAAAAZAAIAAgAAAAEAAAAZAAMAAgAAAAEAAAAZAAQAAgAAAAEAAAAZAAUAAgAAAAEAAAAZAAYAAgAAAAEAAAAZAAcAAgAAAAEAAAAZAAgAAgAAAAEAAAAZAAkAAgAAAAEAAAAZAAoAAgAAAAEAAAAZAAsAAgAAAAEAAAAZAAwAAgAAAAEAAAAZAA0AAgAAAAEAAAAZAA4AAgAAAAEAAAAaAAAAAgAAAAEAAAAaAAEAAgAAAAEAAAAaAAIAAgAAAAEAAAAaAAMAAgAAAAEAAAAaAAQAAgAAAAEAAAAaAAUAAgAAAAEAAAAaAAYAAgAAAAEAAAAaAAcAAgAAAAEAAAAaAAgAAgAAAAEAAAAaAAkAAgAAAAEAAAAaAAoAAgAAAAEAAAAaAAsAAgAAAAEAAAAaAAwAAgAAAAEAAAAaAA0AAgAAAAEAAAAaAA4AAgAAAAEAAAAbAAAAAgAAAAEAAAAbAAEAAgAAAAEAAAAbAAIAAgAAAAEAAAAbAAMAAgAAAAEAAAAbAAQAAgAAAAEAAAAbAAUAAgAAAAEAAAAbAAYAAgAAAAEAAAAbAAcAAgAAAAEAAAAbAAgAAgAAAAEAAAAbAAkAAgAAAAEAAAAbAAoAAgAAAAEAAAAbAAsAAgAAAAEAAAAbAAwAAgAAAAEAAAAbAA0AAgAAAAEAAAAbAA4AAgAAAAEAAAAcAAAAAgAAAAEAAAAcAAEAAgAAAAEAAAAcAAIAAgAAAAEAAAAcAAMAAgAAAAEAAAAcAAQAAgAAAAEAAAAcAAUAAgAAAAEAAAAcAAYAAgAAAAEAAAAcAAcAAgAAAAEAAAAcAAgAAgAAAAEAAAAcAAkAAgAAAAEAAAAcAAoAAgAAAAEAAAAcAAsAAgAAAAEAAAAcAAwAAgAAAAEAAAAcAA0AAgAAAAEAAAAcAA4AAgAAAAEAAAABAAsAAgAAAAEAAAABAAwAAgAAAAEAAAABAA0AAgAAAAEAAAABAA4AAgAAAAEAAAACAAsAAgAAAAEAAAACAAwAAgAAAAEAAAACAA0AAgAAAAEAAAACAA4AAgAAAAEAAAADAAsAAgAAAAEAAAADAAwAAgAAAAEAAAADAA0AAgAAAAEAAAADAA4AAgAAAAEAAAAEAAsAAgAAAAEAAAAEAAwAAgAAAAEAAAAEAA0AAgAAAAEAAAAEAA4AAgAAAAEAAAAFAAsAAgAAAAEAAAAFAAwAAgAAAAEAAAAFAA0AAgAAAAEAAAAFAA4AAgAAAAEAAAAGAAsAAgAAAAEAAAAGAAwAAgAAAAEAAAAGAA0AAgAAAAEAAAAGAA4AAgAAAAEAAAAHAAsAAgAAAAEAAAAHAAwAAgAAAAEAAAAHAA0AAgAAAAEAAAAHAA4AAgAAAAEAAAAIAAsAAgAAAAEAAAAIAAwAAgAAAAEAAAAIAA0AAgAAAAEAAAAIAA4AAgAAAAEAAAAJAAsAAgAAAAEAAAAJAAwAAgAAAAEAAAAJAA0AAgAAAAEAAAAJAA4AAgAAAAEAAAAKAAsAAgAAAAEAAAAKAAwAAgAAAAEAAAAKAA0AAgAAAAEAAAAKAA4AAgAAAAEAAAALAAsAAgAAAAEAAAALAAwAAgAAAAEAAAALAA0AAgAAAAEAAAAMAAsAAgAAAAEAAAAAAAsAAgAAAAEAAAAAAAwAAgAAAAEAAAAAAA0AAgAAAAEAAAAAAA4AAgAAAAEAAAABAAoAAgAAAAEAAAD/////AgAAAAEAAAD//wAAAgAAAAEAAAD//wEAAgAAAAEAAAD//wIAAgAAAAEAAAD//wMAAgAAAAEAAAD//wQAAgAAAAEAAAD//wUAAgAAAAEAAAD//wYAAgAAAAEAAAD//wcAAgAAAAEAAAD//wgAAgAAAAEAAAD//wkAAgAAAAEAAAD//woAAgAAAAEAAAD//wsAAgAAAAEAAAD//wwAAgAAAAEAAAD//w0AAgAAAAEAAAD//w4AAgAAAAEAAAAAAP//AgAAAAEAAAABAP//AgAAAAEAAAACAP//AgAAAAEAAAADAP//AgAAAAEAAAAEAP//AgAAAAEAAAAFAP//AgAAAAEAAAAGAP//AgAAAAEAAAAHAP//AgAAAAEAAAAIAP//AgAAAAEAAAAJAP//AgAAAAEAAAAKAP//AgAAAAEAAAALAP//AgAAAAEAAAAMAP//AgAAAAEAAAANAP//AgAAAAEAAAAOAP//AgAAAAEAAAAPAP//AgAAAAEAAAAQAP//AgAAAAEAAAARAP//AgAAAAEAAAASAP//AgAAAAEAAAATAP//AgAAAAEAAAAUAP//AgAAAAEAAAAVAP//AgAAAAEAAAAWAP//AgAAAAEAAAAXAP//AgAAAAEAAAAYAP//AgAAAAEAAAAZAP//AgAAAAEAAAAaAP//AgAAAAEAAAAbAP//AgAAAAEAAAAcAP//AgAAAAEAAAA=")
-tile_set = SubResource("TileSet_qltgq")
+tile_set = SubResource("TileSet_o52qt")
 collision_enabled = false
 script = ExtResource("4_g02ko")
 
 [node name="AllLayer(Walls)" type="TileMapLayer" parent="Map"]
 z_index = 4
-material = SubResource("ShaderMaterial_oxga5")
+material = SubResource("ShaderMaterial_uryd5")
 use_parent_material = true
 position = Vector2(16, 16)
 tile_map_data = PackedByteArray("AAD+//7/AgAAAAQAAAD///7/AgAEAAQAAAAAAP7/AgACAAQAAAABAP7/AgABAAQAAAACAP7/AgADAAQAAAADAP7/AgABAAQAAAAEAP7/AgABAAQAAAAFAP7/AgABAAQAAAAGAP7/AgABAAQAAAAHAP7/AgACAAQAAAAIAP7/AgAEAAQAAAAJAP7/AgABAAQAAAAKAP7/AgADAAQAAAALAP7/AgABAAQAAAAMAP7/AgABAAQAAAANAP7/AgAEAAQAAAAOAP7/AgABAAQAAAAPAP7/AgABAAQAAAAQAP7/AgABAAQAAAARAP7/AgADAAQAAAASAP7/AgAEAAQAAAATAP7/AgABAAQAAAAUAP7/AgACAAQAAAAVAP7/AgABAAQAAAAWAP7/AgABAAQAAAAXAP7/AgABAAQAAAAYAP7/AgABAAQAAAAZAP7/AgABAAQAAAAaAP7/AgADAAQAAAAbAP7/AgABAAQAAAAcAP7/AgABAAQAAAAdAP7/AgAFAAQAAAAdAP//AgAEAAUAAAAdAAAAAgAFAAUAAAAdAAEAAgAFAAUAAAAdAAIAAgADAAUAAAAdAAMAAgAFAAUAAAAdAAQAAgAFAAUAAAAdAAUAAgAFAAUAAAAdAAYAAgADAAUAAAAdAAcAAgAFAAUAAAAdAAgAAgAFAAUAAAAdAAkAAgAEAAUAAAAdAAoAAgAFAAUAAAAdAAsAAgADAAUAAAAdAAwAAgAFAAUAAAAdAA0AAgAEAAUAAAD+////AgAAAAUAAAD+/wAAAgACAAUAAAD+/wEAAgAAAAUAAAD+/wIAAgABAAUAAAD+/wMAAgAAAAUAAAD+/wQAAgAAAAUAAAD+/wUAAgAAAAUAAAD+/wYAAgAAAAUAAAD+/wcAAgACAAUAAAD+/wgAAgAAAAUAAAD+/wkAAgACAAUAAAD+/woAAgAAAAUAAAD+/wsAAgAAAAUAAAD+/wwAAgABAAUAAAD+/w0AAgAAAAUAAAD+/w4AAgAAAAYAAAAdAA4AAgAFAAYAAAAdAA8AAgAFAAcAAAD+/w8AAgAAAAcAAAD//w8AAgAEAAcAAAAAAA8AAgACAAcAAAABAA8AAgABAAcAAAACAA8AAgABAAcAAAADAA8AAgAEAAcAAAAEAA8AAgACAAcAAAAFAA8AAgABAAcAAAAGAA8AAgABAAcAAAAHAA8AAgABAAcAAAAIAA8AAgADAAcAAAAJAA8AAgAEAAcAAAAKAA8AAgABAAcAAAALAA8AAgABAAcAAAAMAA8AAgABAAcAAAANAA8AAgABAAcAAAAOAA8AAgABAAcAAAAPAA8AAgACAAcAAAAQAA8AAgABAAcAAAARAA8AAgADAAcAAAASAA8AAgAEAAcAAAATAA8AAgADAAcAAAAUAA8AAgABAAcAAAAVAA8AAgABAAcAAAAWAA8AAgABAAcAAAAXAA8AAgABAAcAAAAYAA8AAgABAAcAAAAZAA8AAgABAAcAAAAaAA8AAgADAAcAAAAbAA8AAgABAAcAAAAcAA8AAgABAAcAAAAEAAcAAgAAAAMAAAAGAAcAAgACAAMAAAAFAAcAAgABAAMAAAAQAAYAAgACAAMAAAAOAAYAAgAAAAMAAAAPAAYAAgABAAMAAAA=")
@@ -1130,28 +1589,6 @@ tile_set = ExtResource("9_riqv0")
 tile_map_data = PackedByteArray("AAAMAAAAAgACAAAAAAAMAA8AAgACAAIAAAAMAA4AAgACAAEAAAAMAA0AAgACAAEAAAAMAAwAAgACAAEAAAAMAAsAAgACAAEAAAAMAAoAAgACAAEAAAAMAAkAAgACAAEAAAAMAAgAAgACAAEAAAAMAAcAAgACAAEAAAAMAAYAAgACAAEAAAAMAAUAAgACAAEAAAAMAAQAAgACAAEAAAAMAAMAAgACAAEAAAAMAAIAAgACAAEAAAAMAAEAAgACAAEAAAA=")
 tile_set = ExtResource("10_7p5wf")
 
-[node name="PlayerCharacter" type="CharacterBody2D" parent="."]
-z_index = 2
-position = Vector2(120, 128)
-collision_layer = 5
-collision_mask = 5
-script = ExtResource("11_m4yg3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCharacter"]
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_b548h")
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerCharacter"]
-z_index = 2
-texture = ExtResource("12_7f37b")
-hframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerCharacter/Sprite2D"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_syxub")
-}
-
 [node name="TheORB" type="RigidBody2D" parent="."]
 z_index = 3
 position = Vector2(120, 265)
@@ -1160,7 +1597,7 @@ collision_mask = 2
 script = ExtResource("19_qneam")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TheORB"]
-shape = SubResource("CircleShape2D_p4s4s")
+shape = SubResource("CircleShape2D_bltrt")
 
 [node name="TheORBSprite" type="Sprite2D" parent="TheORB"]
 z_index = 3
@@ -1172,31 +1609,4 @@ hframes = 14
 root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_7gr6y")
-}
-
-[node name="TheGoal" type="Node2D" parent="."]
-position = Vector2(360, 64)
-script = ExtResource("23_n7ar3")
-nextScene = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="TheGoal"]
-texture = ExtResource("24_735pn")
-hframes = 12
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TheGoal/Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_1rwvs")
-}
-
-[node name="Level Transition" type="Node2D" parent="."]
-position = Vector2(-79, 136)
-
-[node name="Sprite2D" type="Sprite2D" parent="Level Transition"]
-texture = ExtResource("27_iqsvi")
-hframes = 8
-vframes = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Level Transition/Sprite2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_0ykh2")
 }

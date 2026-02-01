@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@onready var Player = $"../PlayerCharacter"
+@onready var Player = $"../CanvasLayerPLayer/PlayerCharacter"
 @onready var mainScene = $".."
 @onready var animator = $TheORBSprite/AnimationPlayer
 var isHeld: bool = false

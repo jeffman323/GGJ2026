@@ -1,15 +1,16 @@
 extends CharacterBody2D
 
 
-const SPEED = 200.0
-const JUMP_VELOCITY = -300.0
+const SPEED = 150.0
+const JUMP_VELOCITY = -350.0
 
 @export var currentOrb: RigidBody2D
-@onready var globalOrb = $"../TheORB"
+@onready var globalOrb = $"../../TheORB"
 @onready var theGoal = $"../TheGoal"
 @onready var playerSprite = $Sprite2D
 @onready var animator = $Sprite2D/AnimationPlayer
 
+var dieLockout = 0;
 var lastAnimation = 0;
 var movementLockoutTime = 0
 
@@ -48,6 +49,10 @@ func _physics_process(delta: float) -> void:
 	#no moving if we're picking up an orb
 	if (movementLockoutTime > 0.0) :
 		movementLockoutTime -= delta
+		dieLockout-= delta
+	elif (dieLockout > 0):
+		movementLockoutTime -= delta
+		dieLockout-= delta
 	else:
 		# Add the gravity.
 		if not is_on_floor():
@@ -80,6 +85,8 @@ func chooseAnimation(xdir: float,ydir: float):
 	# jumporb = 7
 	# fallorb = 8
 	# pickup = 9
+	if(dieLockout > 0) :
+		return
 	
 	#check for idle
 	if xdir == 0 && is_on_floor() && currentOrb==null && lastAnimation!=1:
@@ -192,3 +199,12 @@ func dropTheOrb():
 func checkGoal():
 	if self.global_position.distance_to(theGoal.global_position) < 25:
 		levelUp.emit(theGoal.nextScene)
+		movementLockoutTime = 1.8
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	print("spiked")
+	animator.play("Die")
+	movementLockoutTime = 0.7
+	dieLockout = 0.7
+	pass # Replace with function body.
