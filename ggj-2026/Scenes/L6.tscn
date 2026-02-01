@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://c0fecik7xyary"]
+[gd_scene load_steps=75 format=4 uid="uid://bcceusm7l7pqj"]
 
 [ext_resource type="Script" uid="uid://5gp2kfvvoorw" path="res://Scripts/MainScene.gd" id="1_ovrma"]
 [ext_resource type="Texture2D" uid="uid://euahn6kq0e20" path="res://Images/screenwipe.png" id="2_kbjjh"]
@@ -29,10 +29,8 @@
 [ext_resource type="Texture2D" uid="uid://dpwvppewj86qv" path="res://Images/orb.png" id="27_gsptd"]
 [ext_resource type="Texture2D" uid="uid://dpa3ekitjfk1s" path="res://Images/orb-dropped.png" id="28_tqwlr"]
 [ext_resource type="Texture2D" uid="uid://c51qfuedgay4s" path="res://Images/orb-pickedup.png" id="29_x4cbq"]
-[ext_resource type="Texture2D" uid="uid://efckclcyjjf1" path="res://Images/credits.png" id="30_kbjjh"]
-[ext_resource type="Texture2D" uid="uid://bsq28dkosdahs" path="res://Images/mask.png" id="31_tqj3p"]
-[ext_resource type="Texture2D" uid="uid://edogq3xm8jrk" path="res://Images/sprites.png" id="32_wackd"]
-[ext_resource type="Texture2D" uid="uid://cpotrherefem" path="res://Images/jobs.png" id="33_tqj3p"]
+[ext_resource type="Texture2D" uid="uid://dsy87n5bl4cag" path="res://Images/spikes.png" id="30_xud6t"]
+[ext_resource type="Script" uid="uid://cy40im76nwykj" path="res://Scripts/spikes.gd" id="31_555mn"]
 
 [sub_resource type="Animation" id="Animation_hfk56"]
 length = 0.001
@@ -1188,6 +1186,13 @@ _data = {
 &"RESET": SubResource("Animation_ce8d2")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ienww"]
+shader = ExtResource("18_d7brb")
+shader_parameter/cutoff = 1.0
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_0b5yr"]
+points = PackedVector2Array(7, 7, 7, 0, 0, -5, -7, 0, -7, 7)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ovrma")
 
@@ -1213,9 +1218,9 @@ layer = 2
 
 [node name="TheGoal" type="Node2D" parent="CanvasLayerPLayer"]
 z_index = 4
-position = Vector2(471, 379)
+position = Vector2(432, 176)
 script = ExtResource("3_tqj3p")
-nextScene = 6
+nextScene = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayerPLayer/TheGoal"]
 z_index = 4
@@ -1229,7 +1234,7 @@ libraries = {
 
 [node name="FakeGoalSprite" type="Sprite2D" parent="CanvasLayerPLayer/TheGoal"]
 z_index = 4
-position = Vector2(-429, -139)
+position = Vector2(32, 65)
 texture = ExtResource("4_wackd")
 hframes = 12
 
@@ -1240,7 +1245,7 @@ libraries = {
 
 [node name="PlayerCharacter" type="CharacterBody2D" parent="CanvasLayerPLayer"]
 z_index = 2
-position = Vector2(49, 256)
+position = Vector2(472, 256)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("7_4pp07")
@@ -1263,7 +1268,6 @@ libraries = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1303,27 +1307,31 @@ z_index = 4
 material = SubResource("ShaderMaterial_un60j")
 use_parent_material = true
 position = Vector2(16, 16)
-tile_map_data = PackedByteArray("AAD+//7/AgAAAAQAAAD///7/AgABAAQAAAAAAP7/AgACAAQAAAABAP7/AgABAAQAAAACAP7/AgADAAQAAAADAP7/AgABAAQAAAAEAP7/AgABAAQAAAAFAP7/AgABAAQAAAAGAP7/AgABAAQAAAAHAP7/AgACAAQAAAAIAP7/AgACAAQAAAAJAP7/AgABAAQAAAAKAP7/AgADAAQAAAALAP7/AgABAAQAAAAMAP7/AgABAAQAAAANAP7/AgACAAQAAAAOAP7/AgABAAQAAAAPAP7/AgABAAQAAAAQAP7/AgABAAQAAAARAP7/AgADAAQAAAASAP7/AgABAAQAAAATAP7/AgABAAQAAAAUAP7/AgACAAQAAAAVAP7/AgABAAQAAAAWAP7/AgABAAQAAAAXAP7/AgABAAQAAAAYAP7/AgABAAQAAAAZAP7/AgABAAQAAAAaAP7/AgADAAQAAAAbAP7/AgABAAQAAAAcAP7/AgABAAQAAAAdAP7/AgAFAAQAAAAdAP//AgAEAAUAAAAdAAAAAgAFAAUAAAAdAAEAAgAFAAUAAAAdAAIAAgADAAUAAAAdAAMAAgAFAAUAAAAdAAQAAgAFAAUAAAAdAAUAAgAFAAUAAAAdAAYAAgADAAUAAAAdAAcAAgADAAUAAAAdAAgAAgAFAAUAAAAdAAkAAgAEAAUAAAAdAAoAAgAFAAUAAAAdAAsAAgAEAAUAAAAdAAwAAgAFAAUAAAAdAA0AAgAEAAUAAAD+////AgAAAAUAAAD+/wAAAgACAAUAAAD+/wEAAgAAAAUAAAD+/wIAAgABAAUAAAD+/wMAAgAAAAUAAAD+/wQAAgAAAAUAAAD+/wUAAgAAAAUAAAD+/wYAAgAAAAUAAAD+/wcAAgACAAUAAAD+/wgAAgAAAAUAAAD+/wkAAgACAAUAAAD+/woAAgAAAAUAAAD+/wsAAgAAAAUAAAD+/wwAAgABAAUAAAD+/w0AAgAAAAUAAAD+/w4AAgAAAAYAAAAdAA4AAgAFAAYAAAAdAA8AAgAFAAcAAAD+/w8AAgAAAAcAAAD//w8AAgAEAAcAAAAAAA8AAgACAAcAAAABAA8AAgABAAcAAAACAA8AAgABAAcAAAADAA8AAgAEAAcAAAAEAA8AAgACAAcAAAAFAA8AAgABAAcAAAAGAA8AAgABAAcAAAAHAA8AAgABAAcAAAAIAA8AAgADAAcAAAAJAA8AAgAEAAcAAAAKAA8AAgABAAcAAAALAA8AAgABAAcAAAAMAA8AAgABAAcAAAANAA8AAgABAAcAAAAOAA8AAgABAAcAAAAPAA8AAgACAAcAAAAQAA8AAgABAAcAAAARAA8AAgADAAcAAAASAA8AAgAEAAcAAAATAA8AAgADAAcAAAAUAA8AAgABAAcAAAAVAA8AAgABAAcAAAAWAA8AAgABAAcAAAAXAA8AAgABAAcAAAAYAA8AAgABAAcAAAAZAA8AAgABAAcAAAAaAA8AAgADAAcAAAAbAA8AAgABAAcAAAAcAA8AAgABAAcAAAA=")
+tile_map_data = PackedByteArray("AAD+//7/AgAAAAQAAAD///7/AgABAAQAAAAAAP7/AgACAAQAAAABAP7/AgABAAQAAAACAP7/AgADAAQAAAADAP7/AgABAAQAAAAEAP7/AgABAAQAAAAFAP7/AgABAAQAAAAGAP7/AgABAAQAAAAHAP7/AgACAAQAAAAIAP7/AgACAAQAAAAJAP7/AgABAAQAAAAKAP7/AgADAAQAAAALAP7/AgABAAQAAAAMAP7/AgABAAQAAAANAP7/AgACAAQAAAAOAP7/AgABAAQAAAAPAP7/AgABAAQAAAAQAP7/AgABAAQAAAARAP7/AgADAAQAAAASAP7/AgABAAQAAAATAP7/AgABAAQAAAAUAP7/AgACAAQAAAAVAP7/AgABAAQAAAAWAP7/AgABAAQAAAAXAP7/AgABAAQAAAAYAP7/AgABAAQAAAAZAP7/AgABAAQAAAAaAP7/AgADAAQAAAAbAP7/AgABAAQAAAAcAP7/AgABAAQAAAAdAP7/AgAFAAQAAAAdAP//AgAEAAUAAAAdAAAAAgAFAAUAAAAdAAEAAgAFAAUAAAAdAAIAAgADAAUAAAAdAAMAAgAFAAUAAAAdAAQAAgAFAAUAAAAdAAUAAgAFAAUAAAAdAAYAAgADAAUAAAAdAAcAAgABAAIAAAAdAAgAAgAFAAUAAAAdAAkAAgAEAAUAAAAdAAoAAgAFAAUAAAAdAAsAAgADAAUAAAAdAAwAAgAFAAUAAAAdAA0AAgAEAAUAAAD+////AgAAAAUAAAD+/wAAAgACAAUAAAD+/wEAAgAAAAUAAAD+/wIAAgABAAUAAAD+/wMAAgAAAAUAAAD+/wQAAgAAAAUAAAD+/wUAAgAAAAUAAAD+/wYAAgAAAAUAAAD+/wcAAgACAAUAAAD+/wgAAgAAAAUAAAD+/wkAAgACAAUAAAD+/woAAgAAAAUAAAD+/wsAAgAAAAUAAAD+/wwAAgABAAUAAAD+/w0AAgAAAAUAAAD+/w4AAgAAAAYAAAAdAA4AAgAFAAYAAAAdAA8AAgAFAAcAAAD+/w8AAgAAAAcAAAD//w8AAgAEAAcAAAAAAA8AAgACAAcAAAABAA8AAgABAAcAAAACAA8AAgABAAcAAAADAA8AAgAEAAcAAAAEAA8AAgACAAcAAAAFAA8AAgABAAcAAAAGAA8AAgABAAcAAAAHAA8AAgABAAcAAAAIAA8AAgADAAcAAAAJAA8AAgAEAAcAAAAKAA8AAgABAAcAAAALAA8AAgABAAcAAAAMAA8AAgABAAcAAAANAA8AAgABAAcAAAAOAA8AAgABAAcAAAAPAA8AAgACAAcAAAAQAA8AAgABAAcAAAARAA8AAgADAAcAAAASAA8AAgAEAAcAAAATAA8AAgADAAcAAAAUAA8AAgABAAcAAAAVAA8AAgABAAcAAAAWAA8AAgABAAcAAAAXAA8AAgABAAcAAAAYAA8AAgABAAcAAAAZAA8AAgABAAcAAAAaAA8AAgADAAcAAAAbAA8AAgABAAcAAAAcAA8AAgABAAcAAAAaAAsAAgACAAMAAAAZAAsAAgABAAMAAAAYAAsAAgABAAMAAAAXAAsAAgADAAMAAAAXAAoAAgACAAEAAAAXAAkAAgACAAEAAAAXAAgAAgACAAEAAAAXAAcAAgADAAEAAAAYAAcAAgABAAMAAAAZAAcAAgABAAMAAAAaAAcAAgABAAMAAAAbAAcAAgABAAMAAAAcAAcAAgABAAMAAAA=")
 tile_set = ExtResource("21_hnqcj")
 script = ExtResource("19_2vfvw")
 
 [node name="BaseLayer(YesOrb)" type="TileMapLayer" parent="Map"]
 z_index = -1
+tile_map_data = PackedByteArray("AAABAA8AAgAAAAMAAAACAA8AAgABAAMAAAADAA8AAgACAAMAAAABAAwAAgACAAMAAAAAAAwAAgAAAAMAAAABAAcAAgACAAMAAAAAAAcAAgAAAAMAAAAFAAcAAgACAAEAAAAFAAgAAgAFAAIAAAAEAAgAAgAAAAMAAAAFAAkAAgACAAEAAAAFAAoAAgACAAEAAAAFAAsAAgADAAMAAAAGAAsAAgABAAMAAAAHAAsAAgABAAMAAAAIAAsAAgABAAMAAAAJAAsAAgABAAMAAAAKAAsAAgABAAMAAAALAAsAAgABAAMAAAAMAAsAAgABAAMAAAANAAsAAgABAAMAAAAOAAsAAgABAAMAAAAPAAsAAgABAAMAAAAQAAsAAgABAAMAAAAUAAsAAgAFAAMAAAATAAsAAgABAAMAAAASAAsAAgABAAMAAAARAAsAAgABAAMAAAAUAAoAAgACAAEAAAAUAAkAAgACAAEAAAAUAAgAAgACAAEAAAAUAAcAAgACAAEAAAAFAAMAAgAFAAEAAAAEAAMAAgAAAAMAAAAFAAQAAgACAAEAAAAFAAUAAgACAAEAAAAFAAYAAgACAAEAAAAUAAUAAgACAAEAAAAUAAYAAgACAAEAAAAWAAMAAgABAAcAAAAXAAMAAgAHAAAAAAAWAAQAAgABAAQAAAAVAAMAAgABAAcAAAAVAAQAAgABAAQAAAAUAAQAAgABAAAAAAATAAQAAgAGAAEAAAATAAMAAgAGAAIAAAAUAAMAAgABAAcAAAASAAMAAgADAAMAAAASAAIAAgAFAAEAAAARAAIAAgABAAMAAAAQAAIAAgABAAMAAAAPAAIAAgABAAMAAAAOAAIAAgABAAMAAAANAAIAAgABAAMAAAAMAAIAAgABAAMAAAALAAIAAgAAAAMAAAAJAAIAAgACAAEAAAAJAAEAAgACAAEAAAAJAAAAAgACAAAAAAAJAAMAAgACAAEAAAAJAAQAAgACAAEAAAAJAAUAAgACAAEAAAAJAAYAAgADAAIAAAAXAAQAAgAHAAUAAAAYAAQAAgABAAMAAAAZAAQAAgABAAMAAAAcAAMAAgACAAMAAAAbAAMAAgAHAAIAAAAbAAQAAgAHAAEAAAAaAAQAAgAGAAUAAAAJAAgAAgACAAIAAAAKAAYAAgABAAMAAAAQAAcAAgADAAMAAAARAAcAAgAFAAEAAAARAAgAAgACAAIAAAAQAAYAAgAFAAEAAAAJAAcAAgACAAEAAAALAAYAAgACAAMAAAAPAAYAAgABAAMAAAAOAAYAAgAAAAMAAAAaAAMAAgAGAAAAAAA=")
 tile_set = ExtResource("22_alvlu")
 
 [node name="BaseLayer(NoOrb)" type="TileMapLayer" parent="Map"]
+tile_map_data = PackedByteArray("AAABAA8AAgAAAAMAAAACAA8AAgABAAMAAAADAA8AAgACAAMAAAABAAwAAgACAAMAAAAAAAwAAgAAAAMAAAABAAcAAgACAAMAAAAAAAcAAgAAAAMAAAAEAAgAAgAAAAMAAAAFAAgAAgAFAAIAAAAFAAMAAgAFAAEAAAAFAAQAAgACAAEAAAAFAAUAAgACAAEAAAAFAAYAAgACAAEAAAAFAAcAAgACAAEAAAAEAAMAAgAAAAMAAAAFAAkAAgACAAEAAAAFAAoAAgACAAEAAAAFAAsAAgADAAMAAAAGAAsAAgABAAMAAAAHAAsAAgABAAMAAAAIAAsAAgABAAMAAAAJAAsAAgABAAMAAAAKAAsAAgABAAMAAAALAAsAAgABAAMAAAAOAAsAAgABAAMAAAAMAAsAAgABAAMAAAANAAsAAgABAAMAAAAPAAsAAgABAAMAAAAQAAsAAgABAAMAAAARAAsAAgABAAMAAAASAAsAAgABAAMAAAATAAsAAgABAAMAAAAUAAsAAgAFAAMAAAAUAAoAAgACAAEAAAAUAAkAAgACAAEAAAAUAAgAAgACAAEAAAAUAAcAAgACAAEAAAAUAAYAAgACAAEAAAAUAAUAAgACAAAAAAAUAAQAAgABAAQAAAAUAAMAAgABAAcAAAAVAAMAAgABAAcAAAAVAAQAAgABAAQAAAAWAAQAAgABAAQAAAAWAAMAAgABAAcAAAAXAAMAAgAHAAAAAAAXAAQAAgAHAAUAAAAYAAQAAgABAAMAAAAZAAQAAgABAAMAAAAaAAQAAgAGAAUAAAAbAAQAAgAHAAEAAAAbAAMAAgAHAAIAAAAcAAMAAgACAAMAAAATAAQAAgAGAAEAAAATAAMAAgAGAAIAAAASAAMAAgADAAMAAAASAAIAAgAFAAEAAAARAAIAAgABAAMAAAAQAAIAAgABAAMAAAAPAAIAAgABAAMAAAAOAAIAAgABAAMAAAANAAIAAgABAAMAAAAMAAIAAgABAAMAAAALAAIAAgAAAAMAAAAJAAAAAgACAAAAAAAJAAEAAgACAAEAAAAJAAIAAgACAAEAAAAJAAMAAgACAAEAAAAJAAQAAgACAAEAAAAJAAUAAgACAAEAAAAJAAYAAgADAAIAAAAJAAcAAgACAAEAAAAJAAgAAgACAAIAAAAKAAYAAgABAAMAAAAQAAcAAgADAAMAAAAQAAYAAgAFAAEAAAARAAcAAgAFAAEAAAARAAgAAgACAAIAAAALAAYAAgACAAMAAAAPAAYAAgABAAMAAAAOAAYAAgAAAAMAAAAaAAMAAgAGAAAAAAA=")
 tile_set = ExtResource("23_jxbe6")
 
 [node name="OrbLayer(YesOrb)" type="TileMapLayer" parent="Map"]
 z_index = -1
+tile_map_data = PackedByteArray("AAAcAAwAAgAAAAMAAAAdAAwAAgACAAMAAAA=")
 tile_set = ExtResource("24_57hqd")
 
 [node name="OrbLayer(NoOrb)" type="TileMapLayer" parent="Map"]
+tile_map_data = PackedByteArray("AAAdAAwAAgACAAMAAAAcAAwAAgAAAAMAAAA=")
 tile_set = ExtResource("25_0ke12")
 
 [node name="TheORB" type="RigidBody2D" parent="."]
 z_index = 3
-position = Vector2(116, 260)
+position = Vector2(52, 249)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("26_bnv6i")
@@ -1343,19 +1351,1325 @@ libraries = {
 &"": SubResource("AnimationLibrary_7gr6y")
 }
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(258, 61)
-texture = ExtResource("30_kbjjh")
+[node name="Spikes" type="Node2D" parent="."]
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(255, 119)
-texture = ExtResource("31_tqj3p")
+[node name="SpikeOrbLayerNoOrb" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(-55, 215)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 8
+script = ExtResource("31_555mn")
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(169, 215)
-texture = ExtResource("32_wackd")
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeOrbLayerNoOrb"]
+collision_layer = 4
+collision_mask = 4
 
-[node name="Sprite2D4" type="Sprite2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeOrbLayerNoOrb/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeOrbLayerYesOrb" type="Sprite2D" parent="Spikes"]
+position = Vector2(-55, 215)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 9
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeOrbLayerYesOrb"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeOrbLayerYesOrb/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(-80, 215)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb" type="Sprite2D" parent="Spikes"]
 z_index = -1
-position = Vector2(337, 215)
-texture = ExtResource("33_tqj3p")
+position = Vector2(-80, 215)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb2" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(40, 120)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb2"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb2/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb2" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(40, 120)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb2"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb2/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb14" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(88, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb14"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb14/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb26" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(88, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb26"]
+rotation = 3.1415927
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb26/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb15" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(104, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb15"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb15/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb27" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(104, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb27"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb27/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb16" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(344, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb16"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb16/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb28" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(344, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb28"]
+rotation = 3.1415927
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb28/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb17" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(360, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb17"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb17/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb29" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(360, 24)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb29"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb29/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb18" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(408, 72)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb18"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb18/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb30" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(408, 72)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb30"]
+rotation = 3.1415927
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb30/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb19" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(424, 72)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb19"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb19/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb31" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(424, 72)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb31"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb31/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb21" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(392, 184)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb21"]
+rotation = 4.712389
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb21/Area2D"]
+rotation = 4.712389
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb33" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(392, 184)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb33"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb33/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb22" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(392, 168)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb22"]
+rotation = 1.5707964
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb22/Area2D"]
+rotation = 4.712389
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb34" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(392, 168)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb34"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb34/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb23" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(312, 136)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb23"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb23/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb35" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(312, 136)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb35"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb35/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb24" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(312, 152)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb24"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb24/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb36" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(312, 152)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb36"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb36/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb31" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(152, 136)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb31"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb31/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb43" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(152, 136)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb43"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb43/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb32" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(152, 152)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb32"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb32/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb44" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(152, 152)
+rotation = 4.712389
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb44"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb44/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb33" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(120, 88)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb33"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb33/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb45" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(120, 88)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb45"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb45/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb35" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(24, 152)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb35"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb35/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb47" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(24, 152)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb47"]
+rotation = 3.1415927
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb47/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb36" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(40, 152)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb36"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb36/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb48" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(40, 152)
+rotation = 3.1415927
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb48"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb48/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb34" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(120, 104)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb34"]
+rotation = 3.1415927
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb34/Area2D"]
+rotation = 3.1415927
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb46" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(120, 104)
+rotation = 1.5707964
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb46"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb46/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb19" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(136, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb19"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb19/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb20" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(152, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb20"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb20/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb21" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(184, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb21"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb21/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb22" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(200, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb22"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb22/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb23" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(216, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb23"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb23/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb24" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(280, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb24"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb24/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb25" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(344, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb25"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb25/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb37" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(232, 184)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb37"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb37/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb49" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(232, 184)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb49"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb49/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb4" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(136, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb4"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb4/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb4" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(136, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb4"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb4/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb5" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(152, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb5"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb5/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb5" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(168, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb5"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb5/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb6" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(168, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb6"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb6/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb6" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(184, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb6"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb6/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb7" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(184, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb7"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb7/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb7" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(200, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb7"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb7/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb8" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(200, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb8"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb8/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb9" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(216, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb9"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb9/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb8" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(232, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb8"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb8/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb10" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(232, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb10"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb10/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb9" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(248, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb9"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb9/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb11" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(248, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb11"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb11/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb10" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(264, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb10"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb10/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb12" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(264, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb12"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb12/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb13" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(280, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb13"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb13/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb11" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(296, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb11"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb11/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb14" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(296, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb14"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb14/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb12" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(312, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb12"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb12/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb15" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(312, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb15"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb15/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerNoOrb13" type="Sprite2D" parent="Spikes"]
+z_index = 1
+material = SubResource("ShaderMaterial_ienww")
+position = Vector2(328, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 5
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerNoOrb13"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerNoOrb13/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb16" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(328, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb16"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb16/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeBaseLayerYesOrb17" type="Sprite2D" parent="Spikes"]
+z_index = -1
+position = Vector2(344, 264)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+frame = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeBaseLayerYesOrb17"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBaseLayerYesOrb17/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[node name="SpikeAllLayer" type="Sprite2D" parent="Spikes"]
+z_index = 1
+position = Vector2(-173, 250)
+texture = ExtResource("30_xud6t")
+hframes = 4
+vframes = 4
+script = ExtResource("31_555mn")
+
+[node name="Area2D" type="Area2D" parent="Spikes/SpikeAllLayer"]
+collision_layer = 13
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeAllLayer/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_0b5yr")
+
+[connection signal="body_entered" from="Spikes/SpikeOrbLayerNoOrb/Area2D" to="Spikes/SpikeOrbLayerNoOrb" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeOrbLayerYesOrb/Area2D" to="Spikes/SpikeOrbLayerYesOrb" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb/Area2D" to="Spikes/SpikeBaseLayerNoOrb" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb/Area2D" to="Spikes/SpikeBaseLayerYesOrb" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb2/Area2D" to="Spikes/SpikeBaseLayerNoOrb2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb2/Area2D" to="Spikes/SpikeBaseLayerYesOrb2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb14/Area2D" to="Spikes/SpikeBaseLayerNoOrb14" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb26/Area2D" to="Spikes/SpikeBaseLayerYesOrb26" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb15/Area2D" to="Spikes/SpikeBaseLayerNoOrb15" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb27/Area2D" to="Spikes/SpikeBaseLayerYesOrb27" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb16/Area2D" to="Spikes/SpikeBaseLayerNoOrb16" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb28/Area2D" to="Spikes/SpikeBaseLayerYesOrb28" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb17/Area2D" to="Spikes/SpikeBaseLayerNoOrb17" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb29/Area2D" to="Spikes/SpikeBaseLayerYesOrb29" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb18/Area2D" to="Spikes/SpikeBaseLayerNoOrb18" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb30/Area2D" to="Spikes/SpikeBaseLayerYesOrb30" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb19/Area2D" to="Spikes/SpikeBaseLayerNoOrb19" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb31/Area2D" to="Spikes/SpikeBaseLayerYesOrb31" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb21/Area2D" to="Spikes/SpikeBaseLayerNoOrb21" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb33/Area2D" to="Spikes/SpikeBaseLayerYesOrb33" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb22/Area2D" to="Spikes/SpikeBaseLayerNoOrb22" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb34/Area2D" to="Spikes/SpikeBaseLayerYesOrb34" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb23/Area2D" to="Spikes/SpikeBaseLayerNoOrb23" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb35/Area2D" to="Spikes/SpikeBaseLayerYesOrb35" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb24/Area2D" to="Spikes/SpikeBaseLayerNoOrb24" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb36/Area2D" to="Spikes/SpikeBaseLayerYesOrb36" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb31/Area2D" to="Spikes/SpikeBaseLayerNoOrb31" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb43/Area2D" to="Spikes/SpikeBaseLayerYesOrb43" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb32/Area2D" to="Spikes/SpikeBaseLayerNoOrb32" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb44/Area2D" to="Spikes/SpikeBaseLayerYesOrb44" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb33/Area2D" to="Spikes/SpikeBaseLayerNoOrb33" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb45/Area2D" to="Spikes/SpikeBaseLayerYesOrb45" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb35/Area2D" to="Spikes/SpikeBaseLayerNoOrb35" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb47/Area2D" to="Spikes/SpikeBaseLayerYesOrb47" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb36/Area2D" to="Spikes/SpikeBaseLayerNoOrb36" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb48/Area2D" to="Spikes/SpikeBaseLayerYesOrb48" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb34/Area2D" to="Spikes/SpikeBaseLayerNoOrb34" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb46/Area2D" to="Spikes/SpikeBaseLayerYesOrb46" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb19/Area2D" to="Spikes/SpikeBaseLayerYesOrb19" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb20/Area2D" to="Spikes/SpikeBaseLayerYesOrb20" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb21/Area2D" to="Spikes/SpikeBaseLayerYesOrb21" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb22/Area2D" to="Spikes/SpikeBaseLayerYesOrb22" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb23/Area2D" to="Spikes/SpikeBaseLayerYesOrb23" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb24/Area2D" to="Spikes/SpikeBaseLayerYesOrb24" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb25/Area2D" to="Spikes/SpikeBaseLayerYesOrb25" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb37/Area2D" to="Spikes/SpikeBaseLayerNoOrb37" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb49/Area2D" to="Spikes/SpikeBaseLayerYesOrb49" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb4/Area2D" to="Spikes/SpikeBaseLayerNoOrb4" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb4/Area2D" to="Spikes/SpikeBaseLayerYesOrb4" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb5/Area2D" to="Spikes/SpikeBaseLayerYesOrb5" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb5/Area2D" to="Spikes/SpikeBaseLayerNoOrb5" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb6/Area2D" to="Spikes/SpikeBaseLayerYesOrb6" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb6/Area2D" to="Spikes/SpikeBaseLayerNoOrb6" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb7/Area2D" to="Spikes/SpikeBaseLayerYesOrb7" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb7/Area2D" to="Spikes/SpikeBaseLayerNoOrb7" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb8/Area2D" to="Spikes/SpikeBaseLayerYesOrb8" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb9/Area2D" to="Spikes/SpikeBaseLayerYesOrb9" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb8/Area2D" to="Spikes/SpikeBaseLayerNoOrb8" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb10/Area2D" to="Spikes/SpikeBaseLayerYesOrb10" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb9/Area2D" to="Spikes/SpikeBaseLayerNoOrb9" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb11/Area2D" to="Spikes/SpikeBaseLayerYesOrb11" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb10/Area2D" to="Spikes/SpikeBaseLayerNoOrb10" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb12/Area2D" to="Spikes/SpikeBaseLayerYesOrb12" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb13/Area2D" to="Spikes/SpikeBaseLayerYesOrb13" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb11/Area2D" to="Spikes/SpikeBaseLayerNoOrb11" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb14/Area2D" to="Spikes/SpikeBaseLayerYesOrb14" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb12/Area2D" to="Spikes/SpikeBaseLayerNoOrb12" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb15/Area2D" to="Spikes/SpikeBaseLayerYesOrb15" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerNoOrb13/Area2D" to="Spikes/SpikeBaseLayerNoOrb13" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb16/Area2D" to="Spikes/SpikeBaseLayerYesOrb16" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeBaseLayerYesOrb17/Area2D" to="Spikes/SpikeBaseLayerYesOrb17" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Spikes/SpikeAllLayer/Area2D" to="Spikes/SpikeAllLayer" method="_on_area_2d_body_entered"]
