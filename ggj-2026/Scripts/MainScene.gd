@@ -15,10 +15,12 @@ func _process(delta: float) -> void:
 func advanceLevel(level: int):
 	match level:
 		1:
-			get_tree().change_scene_to_file("res://Scenes/Level1.tscn");
+			get_tree().change_scene_to_file("res://Scenes/L1.tscn");
 		2:
-			#get_tree().change_scene_to_file("res://Scenes/Level2.tscn");
-			pass
+			get_tree().change_scene_to_file("res://Scenes/L2.tscn");
+			
 		3:
-			pass
+			get_tree().change_scene_to_file("res://Scenes/L3.tscn");
+		4:
+			get_tree().change_scene_to_file("res://Scenes/L4.tscn");
 	pass
