@@ -11,7 +11,7 @@ void vertex() {
 void fragment() {
 	float dist = distance(orb_position, VERTEX);
 
-	if(dist < 50.1) {
+	if(dist < 70.0) {
 		discard;
 		//COLOR = texture(TEXTURE, UV*.75);
 	}
